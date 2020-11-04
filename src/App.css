@@ -36,3 +36,19 @@
     transform: rotate(360deg);
   }
 }
+
+.ui.form textarea {
+  margin-top: 10% !important;
+  resize : none !important;
+  width: 100% !important;
+  height: 50vh !important;
+  border-color: "red" !important;
+}
+
+
+.submenu:hover {
+  background-color: #2098D1 !important;
+  transition-property: left, right !important;
+  transition-duration: 0.3s !important;
+  transition-timing-function: ease-out !important;
+}
