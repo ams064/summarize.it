@@ -5,3 +5,5 @@ export const SIGNUP_ERR = "SIGNUP_ERR";
 export const LOGIN_LOADING = "LOGIN_LOADING";
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const LOGIN_ERR = "LOGIN_ERR";
+
+export const USER_SIGNOUT = "USER_SIGNOUT";

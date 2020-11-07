@@ -20,7 +20,7 @@ export default () => {
   useEffect(() => {
     if (error) {
       for (const item in error) {
-        setFieldErrors({ ...fieldErrors, [item]: error[item][0] });
+        setFieldErrors({ ...fieldErrors, [item]: error[item] });
       }
     }
   }, [error]);

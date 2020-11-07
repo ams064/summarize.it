@@ -5,6 +5,11 @@ import routes from './routes';
 import 'semantic-ui-css/semantic.min.css';
 import { AppProvider } from './context/Provider';
 
+import Amplify, { Auth } from 'aws-amplify';
+import awsconfig from './aws-exports';
+Amplify.configure(awsconfig);
+
+
 function App() {
   return (
     <AppProvider>

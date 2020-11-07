@@ -5,27 +5,32 @@ import {
   LOGIN_ERR,
 } from "../../utils/constants/actiontypes";
 
-export const login = ({ password, username }) => (dispatch) => {
+import { Auth } from 'aws-amplify';
+
+export const login = ({ password, email }) => (dispatch) => {
   dispatch({
     type: LOGIN_LOADING,
   });
 
-  axiosInstance()
-    .post("/login", {
-      password,
-      username,
-    })
+  Auth.signIn(email, password)
     .then((res) => {
-      localStorage.token = res.data.token;
       dispatch({
         type: LOGIN_SUCCESS,
-        payload: res.data,
+        payload: res,
       });
     })
     .catch((err) => {
-      dispatch({
-        type: LOGIN_ERR,
-        payload: err.response ? err.response.data : "COULD NOT CONNECT",
-      });
+      console.log(err);
+      if(err.code == 'UserNotFoundException' || err.code == 'NotAuthorizedException') {
+        dispatch({
+          type: LOGIN_ERR,
+          payload: 'Incorrect email or password',
+        });
+      } else {
+        dispatch({
+          type: LOGIN_ERR,
+          payload: 'COULD NOT CONNECT',
+        });
+      }
     });
 };

@@ -3,5 +3,6 @@ export default {
       loading: false,
       data: null,
       error: null,
+      isAuth : false,
     },
 };

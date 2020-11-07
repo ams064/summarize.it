@@ -5,35 +5,44 @@ import { login } from "../../context/actions/login";
 
 export default () => {
   const [form, setForm] = useState({});
+  const [err, setErrors] = useState('');
 
   const history = useHistory();
 
   const {
     authDispatch,
     authState: {
-      auth: { loading, error, data },
+      auth: { loading, error, data, isAuth },
     },
   } = useContext(AppContext);
 
 
   const onChange = (e, { name, value }) => {
+    setErrors('');
     setForm({ ...form, [name]: value });
   };
 
+  useEffect(() => {
+    if (error != null) {
+        setErrors(error);
+      }
+  }, [error]);
 
   const loginFormValid = !form.email?.length || !form.password?.length;
 
   const onSubmit = () => {
+    setErrors('');
     login(form)(authDispatch);
   };
 
+  console.log(data);
   useEffect(() => {
-    if (data) {
-      if (data.user) {
+    if (isAuth && data) {
+      if (data.hasOwnProperty('signInUserSession')) {
         history.push("/");
       }
     }
   }, [data]);
 
-  return { form, onChange, loading, error, loginFormValid, onSubmit };
+  return { form, onChange, loading, err, loginFormValid, onSubmit };
 };

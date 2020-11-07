@@ -1,0 +1,27 @@
+{
+  "testbeta": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-summarizeitfrontend-testbeta-130032-authRole",
+      "UnauthRoleArn": "arn:aws:iam::998887322418:role/amplify-summarizeitfrontend-testbeta-130032-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::998887322418:role/amplify-summarizeitfrontend-testbeta-130032-authRole",
+      "Region": "us-west-2",
+      "DeploymentBucketName": "amplify-summarizeitfrontend-testbeta-130032-deployment",
+      "UnauthRoleName": "amplify-summarizeitfrontend-testbeta-130032-unauthRole",
+      "StackName": "amplify-summarizeitfrontend-testbeta-130032",
+      "StackId": "arn:aws:cloudformation:us-west-2:998887322418:stack/amplify-summarizeitfrontend-testbeta-130032/f1f71cd0-1fa9-11eb-97c5-06350a5c710f",
+      "AmplifyAppId": "d3mz7c56hliuza"
+    },
+    "categories": {
+      "auth": {
+        "summarizeitfrontendcdc694decdc694de": {}
+      },
+      "function": {
+        "summarizeitfrontendcdc694decdc694deCustomMessage": {
+          "REDIRECTURL": "'/login'",
+          "EMAILSUBJECT": "Summarize.it Account Confirmation",
+          "EMAILMESSAGE": "Please click the link to confirm your account :"
+        }
+      }
+    }
+  }
+}

@@ -13,6 +13,4 @@ const axiosInstance = axios.create({
     headers,
 });
 
-
-
 export default axiosInstance;

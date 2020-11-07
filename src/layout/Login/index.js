@@ -11,7 +11,7 @@ import Header from "../../components/Header";
 import { Link } from "react-router-dom";
 
 const LoginUI = ({
-  form: { onChange, form, loginFormValid, error, onSubmit, loading },
+  form: { onChange, form, loginFormValid, err, onSubmit, loading },
 }) => {
   return (
     <div>
@@ -23,7 +23,7 @@ const LoginUI = ({
 
           <Segment>
             <Form>
-              {error && <Message content={error?.detail} negative />}
+              {err.length != 0 && <Message content={err} negative />}
               <Form.Field>
                 <Form.Input
                   value={form.email || ""}
@@ -57,7 +57,7 @@ const LoginUI = ({
               </Button>
 
               <Segment>
-                Need an account <Link to="/signup">Sign up</Link>.
+                Need an account? <Link to="/signup">Sign up</Link>.
               </Segment>
             </Form>
           </Segment>

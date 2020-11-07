@@ -15,7 +15,6 @@ const SignupUI = ({
   return (
     <div>
       <Header />
-
       <Grid centered>
         <Grid.Column style={{ maxWidth: 550, marginTop: 20 }}>
           <SemanticHeader>Signup Here</SemanticHeader>
