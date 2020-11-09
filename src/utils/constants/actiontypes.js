@@ -7,3 +7,5 @@ export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const LOGIN_ERR = "LOGIN_ERR";
 
 export const USER_SIGNOUT = "USER_SIGNOUT";
+export const INPUT_SUMMARIZED = "INPUT_SUMMARIZED";
+export const INPUT_CHANGE = "INPUT_CHANGE";

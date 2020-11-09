@@ -4,5 +4,7 @@ export default {
       data: null,
       error: null,
       isAuth : false,
+      currInput : null,
+      currOutput : null,
     },
 };

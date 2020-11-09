@@ -1,5 +1,3 @@
-import axiosInstance from '../../utils/helpers/axios';
-
 import {
     SIGNUP_LOADING,
     SIGNUP_SUCCESS,

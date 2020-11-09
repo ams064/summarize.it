@@ -3,8 +3,6 @@ import axios from 'axios';
 const baseURL = process.env.REACT_APP_BACKEND_URL;
 let headers = {};
 
-// add aws ampigy specfific headers
-
 
 
 // creatng an axios instance, so that we dont need to change code eerytime the api url changes

@@ -17,12 +17,43 @@ import DescriptionIcon from '@material-ui/icons/Description';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import PropTypes from 'prop-types';
-import Grid from '@material-ui/core/Grid';
 
 const columns = [
   { id: 'document', label: 'Document', minWidth: 100 },
   { id: 'date', label: 'Date', minWidth: 20 },
   { id: 'download', label: 'Download', minWidth: 10}
+];
+
+function createData(document, date, download) {
+  return { document, date, download};
+}
+
+const rows = [
+  createData('India', 'IN', 1324171354),
+  createData('China', 'CN', 1403500365),
+  createData('Italy', 'IT', 60483973),
+  createData('United States', 'US', 327167434),
+  createData('India', 'IN', 1324171354),
+  createData('China', 'CN', 1403500365),
+  createData('Italy', 'IT', 60483973),
+  createData('United States', 'US', 327167434),  createData('India', 'IN', 1324171354),
+  createData('China', 'CN', 1403500365),
+  createData('Italy', 'IT', 60483973),
+  createData('United States', 'US', 327167434),  createData('India', 'IN', 1324171354),
+  createData('China', 'CN', 1403500365),
+  createData('Italy', 'IT', 60483973),
+  createData('United States', 'US', 327167434),  createData('India', 'IN', 1324171354),
+  createData('China', 'CN', 1403500365),
+  createData('Italy', 'IT', 60483973),
+  createData('United States', 'US', 327167434),
+  createData('India', 'IN', 1324171354),
+  createData('China', 'CN', 1403500365),
+  createData('Italy', 'IT', 60483973),
+  createData('United States', 'US', 327167434),
+  createData('India', 'IN', 1324171354),
+  createData('China', 'CN', 1403500365),
+  createData('Italy', 'IT', 60483973),
+  createData('United States', 'US', 327167434),
 ];
 
 const useStyles = makeStyles({
@@ -35,15 +66,21 @@ const useStyles = makeStyles({
   },
 });
 
-const DocumentTable = ({
-    tabledata : {handleChangePage, rows, newPage}
- }) => {
+function StickyHeadTable() {
   const classes = useStyles();
-  const [rowsPerPage, setRowsPerPage] = React.useState(6);
-  console.log(rows);
-  console.log(newPage);
+  const [page, setPage] = React.useState(0);
+  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(+event.target.value);
+    setPage(0);
+  };
+
   return (
-    <Grid>
     <div id="container">
     <Paper className={classes.root}>
       <TableContainer className={classes.container}>
@@ -62,7 +99,7 @@ const DocumentTable = ({
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.slice(newPage * rowsPerPage, newPage * rowsPerPage + rowsPerPage).map((row) => {
+            {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
               return (
                 <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
                   {columns.map((column) => {
@@ -84,12 +121,12 @@ const DocumentTable = ({
         component="div"
         count={rows.length}
         rowsPerPage={rowsPerPage}
-        page={newPage}
+        page={page}
         onChangePage={handleChangePage}
+        onChangeRowsPerPage={handleChangeRowsPerPage}
       />
     </Paper>
     </div>
-    </Grid>
   );
 }
 
@@ -134,10 +171,7 @@ const useStyles_ = makeStyles((theme) => ({
   },
 }));
 
-const DashboardUI = ({
-    data : { handleChangePage, rows, newPage }
-}) => {
-
+function DashboardUI() {
   const classes = useStyles_();
   const [value, setValue] = React.useState(0);
 
@@ -166,7 +200,7 @@ const DashboardUI = ({
         <TabPanel value={value} index={0}>
         </TabPanel>
         <TabPanel value={value} index={1}>
-            <DocumentTable tabledata={{handleChangePage, rows, newPage}} />
+            <StickyHeadTable />
         </TabPanel>
     </div>
   );

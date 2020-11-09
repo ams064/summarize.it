@@ -1,28 +1,49 @@
-import logo from './assets/images/logo.svg';
 import './App.css';
-import { BrowserRouter as Router, Switch, Link, Route } from 'react-router-dom';
-import routes from './routes';
+import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import 'semantic-ui-css/semantic.min.css';
-import { AppProvider } from './context/Provider';
 
-import Amplify, { Auth } from 'aws-amplify';
+import { AppProvider } from './context/Provider';
+import LoginComponent from './containers/Login';
+import SignupComponent from './containers/Signup';
+import SummarizeComponent from './containers/Summarize';
+import DashboardComponent from './containers/Dashboard';
+
+import Amplify from 'aws-amplify';
 import awsconfig from './aws-exports';
 Amplify.configure(awsconfig);
 
+function DecisionRoute ({ component : Component, skipIfAuthorized : skip ,...rest}) {
+  if(skip) {
+    return (
+      <Route
+        {...rest}
+        render={(props) => localStorage.getItem('isAuth') !== 'true' ?
+          <Component {...props} />
+          : <Redirect to= {{pathname : '/', state : {from : props.location}}} />
+        }
+        />
+    )
+  }
+  return (
+    <Route
+      {...rest}
+      render={(props) => localStorage.getItem('isAuth') == 'true' ?
+        <Component {...props} />
+        : <Redirect to= {{pathname : '/login', state : {from : props.location}}} />
+      }
+      />
+  )
+}
 
 function App() {
   return (
     <AppProvider>
       <Router>
         <Switch>
-          { routes.map((route, routeIndex) => (
-            <Route
-              key={ routeIndex }
-              path = { route.pathname } 
-              exact
-              render={(props) => <route.component {...props} />}
-            ></Route>
-          ))}
+          <Route path= '/' exact component = {SummarizeComponent} />
+          <DecisionRoute path= '/login' skipIfAuthorized = {true} exact component = {LoginComponent} />
+          <DecisionRoute path= '/signup' exact skipIfAuthorized = {true} component = {SignupComponent} />
+          <DecisionRoute path='/dashboard' exact component = {DashboardComponent} />
         </Switch>
       </Router>
     </AppProvider>

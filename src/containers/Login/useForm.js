@@ -35,7 +35,6 @@ export default () => {
     login(form)(authDispatch);
   };
 
-  console.log(data);
   useEffect(() => {
     if (isAuth && data) {
       if (data.hasOwnProperty('signInUserSession')) {

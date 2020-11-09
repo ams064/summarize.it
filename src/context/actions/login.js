@@ -1,4 +1,3 @@
-import axiosInstance from "../../utils/helpers/axios";
 import {
   LOGIN_LOADING,
   LOGIN_SUCCESS,
@@ -18,6 +17,7 @@ export const login = ({ password, email }) => (dispatch) => {
         type: LOGIN_SUCCESS,
         payload: res,
       });
+      localStorage.setItem('isAuth', true);
     })
     .catch((err) => {
       console.log(err);

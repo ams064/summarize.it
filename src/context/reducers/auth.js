@@ -6,10 +6,12 @@ import {
     LOGIN_SUCCESS,
     LOGIN_ERR,
     USER_SIGNOUT,
+    INPUT_SUMMARIZED,
+    INPUT_CHANGE,
   } from "../../utils/constants/actiontypes";
   
   const auth = (state, { payload, type }) => {
-    console.log(type);
+
     switch (type) {
       case SIGNUP_LOADING:
       case LOGIN_LOADING:
@@ -67,6 +69,26 @@ import {
             loading: false,
             data: null,
             isAuth : false,
+          },
+        };
+
+      case INPUT_SUMMARIZED:
+        return {
+          ...state,
+          auth: {
+            ...state.auth,
+            currInput : payload.inputText,
+            currOutput : payload.outputText,
+          },
+        };
+
+        case INPUT_CHANGE:
+          return {
+            ...state,
+            auth: {
+              ...state.auth,
+              currInput : null,
+              currOutput : null,
           },
         };
       default:
