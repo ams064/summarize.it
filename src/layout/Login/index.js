@@ -13,6 +13,7 @@ import { Link } from "react-router-dom";
 const LoginUI = ({
   form: { onChange, form, loginFormValid, err, onSubmit, loading },
 }) => {
+  console.log(err);
   return (
     <div>
       <Header />
@@ -23,7 +24,9 @@ const LoginUI = ({
 
           <Segment>
             <Form>
-              {err.length != 0 && <Message content={err} negative />}
+              {err.length != 0 && err !== false ?
+                <Message content={err} negative /> : <></>
+              }
               <Form.Field>
                 <Form.Input
                   value={form.email || ""}
