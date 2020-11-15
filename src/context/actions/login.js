@@ -26,10 +26,10 @@ export const login = ({ password, email }) => (dispatch) => {
           type: LOGIN_ERR,
           payload: 'Incorrect email or password',
         });
-      } else {
+      } else if(err.code == 'UserNotConfirmedException') {
         dispatch({
           type: LOGIN_ERR,
-          payload: 'COULD NOT CONNECT',
+          payload: 'Email address is not verified, please check your email for the verification link.'
         });
       }
     });

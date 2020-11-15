@@ -8,6 +8,9 @@ import {
     USER_SIGNOUT,
     INPUT_SUMMARIZED,
     INPUT_CHANGE,
+    SIGNUP_SUCCESS_MESSAGE,
+    SET_ALLOW_SIGNUP,
+    UPDATE_USER_INFO,
   } from "../../utils/constants/actiontypes";
   
   const auth = (state, { payload, type }) => {
@@ -15,7 +18,6 @@ import {
     switch (type) {
       case SIGNUP_LOADING:
       case LOGIN_LOADING:
-        console.log("Loading");
         return {
           ...state,
           auth: {
@@ -34,11 +36,12 @@ import {
             loading: false,
             data: payload,
             isAuth : false,
+            opt_message : SIGNUP_SUCCESS_MESSAGE,
+            allow_signup : false,
           },
         };
 
       case LOGIN_SUCCESS:
-        console.log("Logged in");
         return {
           ...state,
           auth: {
@@ -46,6 +49,8 @@ import {
             loading: false,
             data: payload,
             isAuth : true,
+            opt_message : null,
+            allow_signup : false,
           },
         };
   
@@ -58,6 +63,7 @@ import {
             loading: false,
             error: payload,
             isAuth : false,
+            opt_message : null,
           },
         };
 
@@ -69,6 +75,7 @@ import {
             loading: false,
             data: null,
             isAuth : false,
+            opt_message : null,
           },
         };
 
@@ -91,7 +98,27 @@ import {
               currOutput : null,
           },
         };
+
+        case SET_ALLOW_SIGNUP:
+          return {
+            ...state,
+            auth: {
+              ...state.auth,
+              allow_signup : true,
+          },
+        };
+
+        case UPDATE_USER_INFO:
+          return {
+            ...state,
+            auth: {
+              ...state.auth,
+              data : payload,
+          },
+        };
+
       default:
+        console.log("Default");
         return state;
     }
   };

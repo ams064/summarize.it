@@ -17,44 +17,32 @@ import DescriptionIcon from '@material-ui/icons/Description';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import PropTypes from 'prop-types';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+import Grid from '@material-ui/core/Grid';
+import { FormHelperText } from '@material-ui/core';
+
+const __useStyles = makeStyles((theme) => ({
+  root: {
+    '& .MuiTextField-root': {
+      margin: theme.spacing(1),
+      width: 200,
+      backgroundColor : theme.palette.primary,
+      fontSize: '143px',
+    },
+    '& .MuiButton-contained.Mui-disabled': {
+      backgroundColor: '#cce2ff',
+      color : 'white',
+    }
+  },
+}));
 
 const columns = [
   { id: 'document', label: 'Document', minWidth: 100 },
   { id: 'date', label: 'Date', minWidth: 20 },
   { id: 'download', label: 'Download', minWidth: 10}
 ];
-
-function createData(document, date, download) {
-  return { document, date, download};
-}
-
-const rows = [
-  createData('India', 'IN', 1324171354),
-  createData('China', 'CN', 1403500365),
-  createData('Italy', 'IT', 60483973),
-  createData('United States', 'US', 327167434),
-  createData('India', 'IN', 1324171354),
-  createData('China', 'CN', 1403500365),
-  createData('Italy', 'IT', 60483973),
-  createData('United States', 'US', 327167434),  createData('India', 'IN', 1324171354),
-  createData('China', 'CN', 1403500365),
-  createData('Italy', 'IT', 60483973),
-  createData('United States', 'US', 327167434),  createData('India', 'IN', 1324171354),
-  createData('China', 'CN', 1403500365),
-  createData('Italy', 'IT', 60483973),
-  createData('United States', 'US', 327167434),  createData('India', 'IN', 1324171354),
-  createData('China', 'CN', 1403500365),
-  createData('Italy', 'IT', 60483973),
-  createData('United States', 'US', 327167434),
-  createData('India', 'IN', 1324171354),
-  createData('China', 'CN', 1403500365),
-  createData('Italy', 'IT', 60483973),
-  createData('United States', 'US', 327167434),
-  createData('India', 'IN', 1324171354),
-  createData('China', 'CN', 1403500365),
-  createData('Italy', 'IT', 60483973),
-  createData('United States', 'US', 327167434),
-];
+const rows =[]
 
 const useStyles = makeStyles({
   root: {
@@ -65,6 +53,67 @@ const useStyles = makeStyles({
     maxHeight: 440,
   },
 });
+
+const UserProfileInfo = ({form, buttonDisable, onChange, onSubmit}) => { 
+  const classes = __useStyles();
+
+  return (
+    <Grid container alignItems="center" justify="center">
+    <form className={classes.root} noValidate autoComplete="off" centered>
+      <FormHelperText>This is helper</FormHelperText>
+      <div>
+        <TextField 
+          id="standard-error" 
+          label="First Name" 
+          name="firstName" 
+          value={form.firstName || ''} 
+          onChange={onChange}
+          error = {form.firstName?.length == 0 ? true : false}
+          helperText={form.firstName?.length == 0 ? "Field can not be blank" : "" }/>
+        <TextField
+          error = {form.lastName?.length == 0 ? true : false}
+          id="standard-error"
+          label="Last Name"
+          value={form.lastName || ''}
+          onChange={onChange}
+          name="lastName"
+          helperText={form.lastName?.length == 0 ? "Field can not be blank" : "" }
+        />
+      </div>
+      <div>
+        <TextField error = {false} id="standard-error" name="email" label="Email" value={form.email || ''}  disabled onChange={onChange} />
+        <TextField  error = {false} id="standard-error" 
+        name="currentPassword" 
+        label="Current Password" 
+        type="password" 
+        onChange={onChange}
+        error={(form.newPassword?.length && form.confirmPassword?.length) ? form.currentPassword?.length == 0 ? true : false : false} />
+      </div>
+      <div>
+        <TextField
+          error = {(form.currentPassword?.length) ? form.newPassword?.length == 0 ? true : false : false}
+          id="standard-error"
+          label="New Password"
+          type= "password"
+          onChange={onChange}
+          name="newPassword"
+          helperText={(form.currentPassword?.length) ? form.newPassword?.length == 0 ? "Field can not be blank" : "" : ""}
+        />
+        <TextField 
+        error = {(form.newPassword?.length) ? form.confirmPassword?.length == 0 ? true : false : false} 
+        id="standard-error" 
+        label="Confirm Password" 
+        name="confirmPassword" 
+        type="password" 
+        onChange={onChange} />
+      </div>
+      <div>
+      <Button onClick={onSubmit}disabled={!buttonDisable} color='primary' variant="contained">Update Information</Button>
+      </div>
+    </form>
+    </Grid>
+  );
+}
 
 function StickyHeadTable() {
   const classes = useStyles();
@@ -129,7 +178,6 @@ function StickyHeadTable() {
     </div>
   );
 }
-
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -166,12 +214,13 @@ function a11yProps(index) {
 const useStyles_ = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
-    width: '100%',
     backgroundColor: theme.palette.background.paper,
   },
 }));
 
-function DashboardUI() {
+const DashboardUI = ({ 
+  data : {form , infoUpdated, onChange, onSubmit}
+}) => {
   const classes = useStyles_();
   const [value, setValue] = React.useState(0);
 
@@ -183,24 +232,21 @@ function DashboardUI() {
     <div className={classes.root}>
         <Header />
         <div></div>
-        <AppBar  style={{width:'30%', margin: '0 auto'}} position="static">
+        <AppBar position="static">
             <Tabs
                 value={value}
-                fullWidth={true}
                 onChange={handleChange}
-                variant="fullWidth"
-                scrollButtons="off"
                 aria-label="scrollable prevent tabs example"
                 centered
             >
-                <Tab icon={<PersonPinIcon />} aria-label="phone" {...a11yProps(0)} />
-                <Tab icon={<DescriptionIcon />} aria-label="favorite" {...a11yProps(1)} />
+                <Tab label="Profile" icon={<PersonPinIcon />} aria-label="phone" {...a11yProps(0)} />
+                <Tab label= "Documents" icon={<DescriptionIcon />} aria-label="favorite" {...a11yProps(1)} />
             </Tabs>
         </AppBar>
         <TabPanel value={value} index={0}>
+          <UserProfileInfo form={form} buttonDisable = {infoUpdated} onChange={onChange} onSubmit={onSubmit} />
         </TabPanel>
         <TabPanel value={value} index={1}>
-            <StickyHeadTable />
         </TabPanel>
     </div>
   );

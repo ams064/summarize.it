@@ -2,18 +2,19 @@ import { useState, useContext, useEffect } from "react";
 import { signup } from "../../context/actions/signup";
 import { useHistory } from "react-router-dom";
 import { AppContext } from "../../context/Provider";
+import { SET_ALLOW_SIGNUP } from "../../utils/constants/actiontypes";
 
 export default () => {
   // set inital state of the form to empty object
   const [form, setForm] = useState({});
   const [fieldErrors, setFieldErrors] = useState({});
-
+  const [message, setMessage] = useState('');
   const history = useHistory();
 
   const {
     authDispatch,
     authState: {
-      auth: { loading, error, data },
+      auth: { loading, error, data, opt_message, allow_signup },
     },
   } = useContext(AppContext);
 
@@ -25,8 +26,13 @@ export default () => {
     }
   }, [error]);
 
+  
   useEffect(() => {
-    if (data) {
+    if (data && data.user.signInUserSession == null && !allow_signup) {
+      authDispatch({
+        type : SET_ALLOW_SIGNUP,
+        payload : data,
+      })
       history.push("/login");
     }
   }, [data]);
@@ -35,6 +41,8 @@ export default () => {
   // Update form on value change using setForm()
   const onChange = (event, { name, value }) => {
     setForm({ ...form, [name]: value });
+    setFieldErrors('');
+    setMessage('');
   };
 
   // Disables the submit button if one of the field is missing

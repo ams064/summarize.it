@@ -17,7 +17,7 @@ function DecisionRoute ({ component : Component, skipIfAuthorized : skip ,...res
     return (
       <Route
         {...rest}
-        render={(props) => localStorage.getItem('isAuth') !== 'true' ?
+        render={(props) => localStorage.getItem('isAuth') === 'false' ?
           <Component {...props} />
           : <Redirect to= {{pathname : '/', state : {from : props.location}}} />
         }
@@ -27,7 +27,7 @@ function DecisionRoute ({ component : Component, skipIfAuthorized : skip ,...res
   return (
     <Route
       {...rest}
-      render={(props) => localStorage.getItem('isAuth') == 'true' ?
+      render={(props) => localStorage.getItem('isAuth') === 'true' ?
         <Component {...props} />
         : <Redirect to= {{pathname : '/login', state : {from : props.location}}} />
       }

@@ -1,6 +1,7 @@
+import _ from 'lodash';
 import React from 'react';
 import Header from '../../components/Header';
-import { Button, Form, Grid, TextArea, Icon, Modal } from 'semantic-ui-react';
+import { Button, Form, Grid, TextArea, Icon, Dropdown } from 'semantic-ui-react';
 import '../../App.css';
 import { Link } from 'react-router-dom';
 import Dialog from '@material-ui/core/Dialog';
@@ -10,20 +11,30 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import MatButton from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
-import { INPUT_SUMMARIZED } from '../../utils/constants/actiontypes';
-import { input } from 'aws-amplify';
+import ChipInput from 'material-ui-chip-input'
 
+const getOptions = (number, prefix = 'Length: ', suffix = '%') =>
+  _.times(number, (index) => ({
+    key: index,
+    text: `${prefix}${(index+1)*10}${suffix}`,
+    value: index,
+  }))
 
 const SummarizeUI = ({
-    form : {onInputChange, inputText, outputText, inputTextValid, onOutputChange, err, onSummarizeSubmit, onSaveSubmit, summarizeLoad, saveLoad, canSave }
+    form : {onInputChange, inputText, outputText, inputTextValid, onOutputChange, err, 
+        onSummarizeSubmit, onSaveSubmit, summarizeLoad, saveLoad, canSave, handleLength, handleContextTags, handleClearOutputText }
 }) => {
 
     const [open, setOpen] = React.useState(false);
 
-    const handleClickOpen = () => {
+    const handleSaveClickOpen = () => {
       setOpen(true);
     };
   
+    const handleClearClickOpen = () => {
+        setOpen(true);
+      };
+    
     const handleClose = () => {
       setOpen(false);
     };
@@ -59,18 +70,38 @@ const SummarizeUI = ({
                 </Grid.Column>
             </Grid>
             <Grid container columns={2} stackable centered >
+                <ChipInput
+                    fullWidth
+                    defaultValue={['News','Technology','Facts','Internet','United States']}
+                    onChange={(chips) => handleContextTags(chips)}
+                    variant='outlined'
+                    placeholder="Enter/Delete tags"
+                    allowDuplicates={false}
+                />
                 <Grid.Column textAlign="right">
+                    <Dropdown style={{ textAlign:'center', width:150, backgroundColor:'#2185d0', color:'#f2fafe'}} 
+                    className='button icon' 
+                    primary 
+                    placeholder='Length ' 
+                    scrolling 
+                    options={getOptions(7)} 
+                    onChange={handleLength}
+                    />
                     <Button style={{ width:150 }} onClick = {onSummarizeSubmit} primary loading={summarizeLoad} disabled={inputTextValid}>
                         <Icon name="compress"></Icon>
                         Summarize
                         </Button>
                 </Grid.Column>
                 <Grid.Column textAlign="left">
-                    <Button style={{ width:150 }} primary loading={saveLoad} onClick= {handleClickOpen} disabled={ canSave }>
+                    <Button style={{ width:150 }} primary loading={saveLoad} onClick= {handleSaveClickOpen} disabled={ canSave }>
                         <Icon name="save"></Icon>
                         Save
                     </Button>
-                    {localStorage.getItem('isAuth') == 'true' ? 
+                    <Button style={{ width:150 }} primary loading={saveLoad} onClick= {handleClearOutputText} disabled={ canSave }>
+                        <Icon name="save"></Icon>
+                        Clear Output
+                    </Button>
+                    {sessionStorage.getItem('isAuth') == 'true' ? 
                         <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
                             <DialogTitle id="form-dialog-title">Save</DialogTitle>
                             <DialogContent>

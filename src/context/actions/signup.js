@@ -21,7 +21,6 @@ import { Auth } from 'aws-amplify';
           type: SIGNUP_SUCCESS,
           payload: res,
         });
-        console.log(res);
       })
       .catch((err) => {
         if(err.code == 'UsernameExistsException' || err.message.toLowerCase().includes('email')) {
@@ -41,7 +40,7 @@ import { Auth } from 'aws-amplify';
         else {
           dispatch({
             type: SIGNUP_ERR,
-            payload: {'error' : "COULD NOT CONNECT"},
+            payload: {'error' : "COULD NOT CONNECT TO SERVER"},
           });
         }
       });

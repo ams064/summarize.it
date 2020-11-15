@@ -93,7 +93,7 @@ const Header = () => {
 
     const {
       authDispatch,
-  } = useContext(AppContext);
+    } = useContext(AppContext);
 
     const handleProfileMenuOpen = (event) => {
         setAnchorEl(event.currentTarget);
@@ -116,8 +116,6 @@ const Header = () => {
         handleMenuClose();
         signOut(history)(authDispatch);
     }
-
-
 
     const menuId = 'primary-search-account-menu';
     const renderMenu = (
@@ -225,29 +223,6 @@ const Header = () => {
           {renderMenu}
         </div>
       );
-
-    /*
-    return (
-        <Menu secondary pointing >
-            <Image src={logo} width={60} />
-            <Menu.Item as={ Link } to='/'style={{fontSize:22, marginLeft: -25 }}>Summarize.it</Menu.Item>
-            <Menu.Item className="submenu" position="right" as={ Link } to='/'style={{fontSize:22}}>How it works?</Menu.Item>
-            <Menu.Item className="submenu" as={ Link } to='/dashboard'style={{fontSize:22}}>Contact</Menu.Item>
-            <Menu.Item >
-                { localStorage.getItem('isAuth') == 'true' ?
-                    <Button style={{ margin:0 }} onClick={() => logout()} color='red' basic icon>
-                        <Icon name="sign-out"></Icon>
-                    Logout
-                    </Button> :
-                    <Button style={{margin:0}} as={ Link } to='/login' color='blue' basic icon>
-                        <Icon name="sign-in"></Icon>
-                        Login
-                    </Button>
-                }
-            </Menu.Item>
-        </Menu>
-    )
-*/
 };
 
 export default Header;

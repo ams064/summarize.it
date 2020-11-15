@@ -9,3 +9,11 @@ export const LOGIN_ERR = "LOGIN_ERR";
 export const USER_SIGNOUT = "USER_SIGNOUT";
 export const INPUT_SUMMARIZED = "INPUT_SUMMARIZED";
 export const INPUT_CHANGE = "INPUT_CHANGE";
+export const SET_ALLOW_SIGNUP = "ALLOW_SIGNUP";
+
+export const UPDATE_USER_INFO = "UPDATE_USER_INFO"
+
+export const SIGNUP_SUCCESS_MESSAGE = "A verification email has been sent to your given email. Please verify your email before login."
+
+export const PASSWORD_CHANGE = "PASSWORD_CHANGE"
+export const PROFILE_CHANGE = "PROFILE_CHANGE"

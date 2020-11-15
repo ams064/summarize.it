@@ -8,11 +8,12 @@ export const signOut = (history) => (dispatch) => {
     Auth.signOut()
     .then((res) => {
         localStorage.setItem('isAuth', false);
+        history.push('/login');
         dispatch({
             type: USER_SIGNOUT,
             payload : null,
         })
-        history.push('/login');
+
     })
     .catch((res) => {
         console.log("Error signing out");

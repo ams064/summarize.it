@@ -5,12 +5,13 @@ import {
   Grid,
   Header as SemanticHeader,
   Segment,
+  Message,
 } from "semantic-ui-react";
 import Header from "../../components/Header";
 import { Link } from "react-router-dom";
 
 const SignupUI = ({
-  form: { onChange, form, signupFormValid, onSubmit, loading, fieldErrors },
+  form: { onChange, form, signupFormValid, onSubmit, loading, fieldErrors, message },
 }) => {
   return (
     <div>

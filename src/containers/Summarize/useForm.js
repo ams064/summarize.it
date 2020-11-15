@@ -20,9 +20,8 @@ export default () => {
   const [summarizeLoad, setSummarizeLoad] = useState(false);
   const [saveLoad, setSaveLoad] = useState(false);
   const [summarized, setSummarized] = useState(true);
-
-  const history = useHistory();
-
+  const [length, setOutputLength] = useState(50);
+  const [tags, setContextTags] = useState([]);
 
   const onInputChange = (e, { name, value }) => {
     setErrors('');
@@ -37,6 +36,20 @@ export default () => {
     });
   };
 
+  const handleLength = (event, {value}) => {
+    setOutputLength((value + 1)*10);
+  }
+
+  function handleContextTags(chips) {
+    setContextTags(chips);
+
+  }
+
+  const handleClearOutputText = () => {
+    setOutputText('');
+    setSummarized(true);
+  }
+
   useEffect(() => {
     if (error != null) {
         setErrors(error);
@@ -48,7 +61,7 @@ export default () => {
   const onSummarizeSubmit = () => {
     setErrors('');
     setSummarizeLoad(true);
-    summarize(inputText)(setOutputText)(setSummarizeLoad)(setSummarized)(authDispatch);
+    summarize(inputText, length, tags)(setOutputText)(setSummarizeLoad)(setSummarized)(authDispatch);
   };
 
   const onSaveSubmit = () => {
@@ -59,5 +72,5 @@ export default () => {
   const canSave = summarized;
   
 
-  return { inputText, onInputChange, outputText, summarizeLoad, err, inputTextValid, onSummarizeSubmit, onSaveSubmit, saveLoad, canSave };
+  return { inputText, onInputChange, outputText, summarizeLoad, err, inputTextValid, onSummarizeSubmit, onSaveSubmit, saveLoad, canSave, handleLength, handleContextTags, handleClearOutputText };
 };

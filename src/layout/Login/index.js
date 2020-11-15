@@ -11,7 +11,7 @@ import Header from "../../components/Header";
 import { Link } from "react-router-dom";
 
 const LoginUI = ({
-  form: { onChange, form, loginFormValid, err, onSubmit, loading },
+  form: { onChange, form, loginFormValid, err, onSubmit, loading, message },
 }) => {
   console.log(err);
   return (
@@ -21,11 +21,11 @@ const LoginUI = ({
       <Grid centered>
         <Grid.Column style={{ maxWidth: 550, marginTop: 20 }}>
           <SemanticHeader>Login to your account</SemanticHeader>
-
           <Segment>
             <Form>
               {err.length != 0 && err !== false ?
-                <Message content={err} negative /> : <></>
+                <Message content={err} negative /> : message.length != 0 && message !== null ?
+                <Message content={message} positive /> : <></>
               }
               <Form.Field>
                 <Form.Input
@@ -47,7 +47,6 @@ const LoginUI = ({
                   label="Password"
                 />
               </Form.Field>
-
               <Button
                 onClick={onSubmit}
                 disabled={loginFormValid || loading}
@@ -58,7 +57,6 @@ const LoginUI = ({
               >
                 Log In
               </Button>
-
               <Segment>
                 Need an account? <Link to="/signup">Sign up</Link>.
               </Segment>

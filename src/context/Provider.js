@@ -1,4 +1,4 @@
-import React, { createContext, useReducer } from 'react';
+import React, { createContext, useReducer, useEffect, useState } from 'react';
 import authInitialStates from './init/authInitialStates';
 import auth from './reducers/auth';
 import { Auth } from 'aws-amplify';
@@ -6,13 +6,18 @@ import { Auth } from 'aws-amplify';
 export const AppContext = createContext({});
 
 export const AppProvider = ({ children }) => {
+
+    const [s, setState] = useState({});
+
+    const authInit = authInitialStates;
     Auth.currentAuthenticatedUser({
-        bypassCache: false
+        bypassCache: true
     })
     .then((user) => {
         localStorage.setItem('isAuth', true);
-        authInitialStates.data = user;
-        authInitialStates.isAuth = true;
+        authInitialStates.auth.data = user;
+        authInitialStates.auth.isAuth = true;
+        setState(authInitialStates);
     })
     .catch((err) => {
         localStorage.setItem('isAuth', false);
