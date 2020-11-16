@@ -2,7 +2,6 @@ import { useState, useContext, useEffect } from "react";
 import { AppContext } from "../../context/Provider";
 import { useHistory } from "react-router-dom";
 import { login } from "../../context/actions/login";
-import { SET_ALLOW_SIGNUP } from '../../utils/constants/actiontypes';
 
 export default () => {
   const [form, setForm] = useState({});

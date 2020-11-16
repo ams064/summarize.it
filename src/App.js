@@ -7,6 +7,7 @@ import LoginComponent from './containers/Login';
 import SignupComponent from './containers/Signup';
 import SummarizeComponent from './containers/Summarize';
 import DashboardComponent from './containers/Dashboard';
+import ForgotPasswordComponent from './containers/ForgotPassword';
 
 import Amplify from 'aws-amplify';
 import awsconfig from './aws-exports';
@@ -43,6 +44,7 @@ function App() {
           <Route path= '/' exact component = {SummarizeComponent} />
           <DecisionRoute path= '/login' skipIfAuthorized = {true} exact component = {LoginComponent} />
           <DecisionRoute path= '/signup' exact skipIfAuthorized = {true} component = {SignupComponent} />
+          <DecisionRoute path= '/forgotpassword' exact skipIfAuthorized = {true} component = {ForgotPasswordComponent} />
           <DecisionRoute path='/dashboard' exact component = {DashboardComponent} />
         </Switch>
       </Router>

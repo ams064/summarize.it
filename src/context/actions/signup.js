@@ -14,7 +14,6 @@ import { Auth } from 'aws-amplify';
     dispatch({
       type: SIGNUP_LOADING,
     });
-    console.log(password)
     Auth.signUp({username, password, attributes : {'custom:last_name' : last_name, 'custom:first_name' : first_name}})
       .then((res) => {
         dispatch({

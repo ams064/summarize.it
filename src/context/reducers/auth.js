@@ -11,6 +11,7 @@ import {
     SIGNUP_SUCCESS_MESSAGE,
     SET_ALLOW_SIGNUP,
     UPDATE_USER_INFO,
+    RESET_PASSWORD,
   } from "../../utils/constants/actiontypes";
   
   const auth = (state, { payload, type }) => {
@@ -114,6 +115,15 @@ import {
             auth: {
               ...state.auth,
               data : payload,
+          },
+        };
+
+        case RESET_PASSWORD:
+          return {
+            ...state,
+            auth: {
+              ...state.auth,
+              opt_message : payload,
           },
         };
 

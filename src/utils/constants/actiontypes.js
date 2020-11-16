@@ -17,3 +17,5 @@ export const SIGNUP_SUCCESS_MESSAGE = "A verification email has been sent to you
 
 export const PASSWORD_CHANGE = "PASSWORD_CHANGE"
 export const PROFILE_CHANGE = "PROFILE_CHANGE"
+
+export const RESET_PASSWORD = "RESET_PASSWORD"

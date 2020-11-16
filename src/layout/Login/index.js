@@ -13,7 +13,6 @@ import { Link } from "react-router-dom";
 const LoginUI = ({
   form: { onChange, form, loginFormValid, err, onSubmit, loading, message },
 }) => {
-  console.log(err);
   return (
     <div>
       <Header />
@@ -59,6 +58,9 @@ const LoginUI = ({
               </Button>
               <Segment>
                 Need an account? <Link to="/signup">Sign up</Link>.
+              </Segment>
+              <Segment>
+              Trouble accessing your account? <Link to="/forgotpassword">Click here</Link>
               </Segment>
             </Form>
           </Segment>
