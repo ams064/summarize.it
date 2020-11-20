@@ -8,5 +8,6 @@ export default {
       isAuth : false,
       currInput : null,
       currOutput : null,
+      rowsChange : false,
     },
 };

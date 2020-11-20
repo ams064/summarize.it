@@ -12,6 +12,7 @@ import {
     SET_ALLOW_SIGNUP,
     UPDATE_USER_INFO,
     RESET_PASSWORD,
+    SUMMARY_SAVED
   } from "../../utils/constants/actiontypes";
   
   const auth = (state, { payload, type }) => {
@@ -52,6 +53,7 @@ import {
             isAuth : true,
             opt_message : null,
             allow_signup : false,
+            rowsChange : true,
           },
         };
   
@@ -77,6 +79,7 @@ import {
             data: null,
             isAuth : false,
             opt_message : null,
+            rowsChange : false,
           },
         };
 
@@ -127,6 +130,15 @@ import {
           },
         };
 
+        case SUMMARY_SAVED:
+          return {
+            ...state,
+            auth : {
+              ...state.auth,
+              rowsChange : true,
+            },
+          };
+  
       default:
         console.log("Default");
         return state;

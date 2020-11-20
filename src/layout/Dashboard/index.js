@@ -22,6 +22,7 @@ import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import { FormHelperText } from '@material-ui/core';
 
+
 const __useStyles = makeStyles((theme) => ({
   root: {
     '& .MuiTextField-root': {
@@ -42,7 +43,6 @@ const columns = [
   { id: 'date', label: 'Date', minWidth: 20 },
   { id: 'download', label: 'Download', minWidth: 10}
 ];
-const rows =[]
 
 const useStyles = makeStyles({
   root: {
@@ -108,14 +108,14 @@ const UserProfileInfo = ({form, buttonDisable, onChange, onSubmit}) => {
         onChange={onChange} />
       </div>
       <div>
-      <Button onClick={onSubmit}disabled={!buttonDisable} color='primary' variant="contained">Update Information</Button>
+      <Button onClick={onSubmit} disabled={!buttonDisable} color='primary' variant="contained">Update Information</Button>
       </div>
     </form>
     </Grid>
   );
 }
 
-function StickyHeadTable() {
+const StickyHeadTable = ({rows, handleDocumentDownload, downloading}) => {
   const classes = useStyles();
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
@@ -150,12 +150,15 @@ function StickyHeadTable() {
           <TableBody>
             {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
               return (
-                <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
+                <TableRow role="checkbox" tabIndex={-1} key={row.code}>
                   {columns.map((column) => {
                     const value = row[column.id];
                     return (
                       <TableCell key={column.id} align={column.align}>
-                        {column.format && typeof value === 'number' ? column.format(value) : value}
+                        {(column.id === 'download' ) || (column.format && typeof value === 'number') ?  
+                          column.id === 'download' ? 
+                            <Button color='primary' variant='contained' onClick={() => {handleDocumentDownload(row)}}>Download</Button>
+                            : column.format(value) : value }
                       </TableCell>
                     );
                   })}
@@ -219,7 +222,7 @@ const useStyles_ = makeStyles((theme) => ({
 }));
 
 const DashboardUI = ({ 
-  data : {form , infoUpdated, onChange, onSubmit}
+  data : {form, infoUpdated, onChange, onSubmit, rows, handleDocumentDownload, downloading}
 }) => {
   const classes = useStyles_();
   const [value, setValue] = React.useState(0);
@@ -247,6 +250,7 @@ const DashboardUI = ({
           <UserProfileInfo form={form} buttonDisable = {infoUpdated} onChange={onChange} onSubmit={onSubmit} />
         </TabPanel>
         <TabPanel value={value} index={1}>
+          <StickyHeadTable rows={rows} handleDocumentDownload={handleDocumentDownload} downloading={downloading} />
         </TabPanel>
     </div>
   );

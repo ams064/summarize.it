@@ -1,6 +1,5 @@
 import { useState, useContext, useEffect } from "react";
 import { AppContext } from "../../context/Provider";
-import { useHistory } from "react-router-dom";
 import { summarize } from '../../context/actions/summarize';
 import { save } from '../../context/actions/save';
 import { INPUT_CHANGE } from "../../utils/constants/actiontypes";
@@ -42,7 +41,6 @@ export default () => {
 
   function handleContextTags(chips) {
     setContextTags(chips);
-
   }
 
   const handleClearOutputText = () => {
@@ -66,7 +64,7 @@ export default () => {
 
   const onSaveSubmit = () => {
     setSaveLoad(true);
-    save(inputText, outputText)(setSaveLoad);
+    save(inputText, outputText)(setSaveLoad)(authDispatch);
   }
 
   const canSave = summarized;

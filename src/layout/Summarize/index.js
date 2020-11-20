@@ -101,7 +101,7 @@ const SummarizeUI = ({
                         <Icon name="save"></Icon>
                         Clear Output
                     </Button>
-                    {sessionStorage.getItem('isAuth') == 'true' ? 
+                    {localStorage.getItem('isAuth') == 'true' ? 
                         <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
                             <DialogTitle id="form-dialog-title">Save</DialogTitle>
                             <DialogContent>

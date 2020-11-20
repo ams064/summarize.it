@@ -18,6 +18,7 @@ export const login = ({ password, email }) => (dispatch) => {
         payload: res,
       });
       localStorage.setItem('isAuth', true);
+      console.log(res);
     })
     .catch((err) => {
       console.log(err);
