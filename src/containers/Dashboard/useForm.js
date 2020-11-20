@@ -50,6 +50,7 @@ export default () => {
       
       let axiosConfig = {
         headers: {
+            'Access-Control-Allow-Origin' : '*',
             'Authorization': data.signInUserSession.idToken.jwtToken,
         }
       };
