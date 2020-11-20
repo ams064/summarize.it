@@ -50,7 +50,7 @@ export default () => {
       
       let axiosConfig = {
         headers: {
-            'user_token': data.signInUserSession.idToken.jwtToken,
+            'Authorization': data.signInUserSession.idToken.jwtToken,
         }
       };
       setDownloading({...downloading, [row['document']] : true});
