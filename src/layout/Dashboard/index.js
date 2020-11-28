@@ -19,6 +19,7 @@ import Box from '@material-ui/core/Box';
 import PropTypes from 'prop-types';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import { Button as SemButton } from 'semantic-ui-react';
 import Grid from '@material-ui/core/Grid';
 import { FormHelperText } from '@material-ui/core';
 
@@ -148,7 +149,7 @@ const StickyHeadTable = ({rows, handleDocumentDownload, downloading}) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
+            {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row, index) => {
               return (
                 <TableRow role="checkbox" tabIndex={-1} key={row.code}>
                   {columns.map((column) => {
@@ -157,7 +158,7 @@ const StickyHeadTable = ({rows, handleDocumentDownload, downloading}) => {
                       <TableCell key={column.id} align={column.align}>
                         {(column.id === 'download' ) || (column.format && typeof value === 'number') ?  
                           column.id === 'download' ? 
-                            <Button color='primary' variant='contained' onClick={() => {handleDocumentDownload(row)}}>Download</Button>
+                            <SemButton color='primary' variant='contained' loading={downloading[index] === true ? true : false} onClick={() => { handleDocumentDownload(row, index) } }> Download </SemButton>
                             : column.format(value) : value }
                       </TableCell>
                     );

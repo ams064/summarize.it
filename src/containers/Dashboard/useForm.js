@@ -42,7 +42,8 @@ export default () => {
       }
     };
 
-    const handleDocumentDownload = (row) => {
+    const handleDocumentDownload = (row, index) => {
+
       var postData = {
         document_name: row['document'],
         timestamp : 'today',
@@ -53,23 +54,27 @@ export default () => {
             'Authorization': data.signInUserSession.idToken.jwtToken,
         }
       };
-      setDownloading({...downloading, [row['document']] : true});
+
+      setDownloading({...downloading, [index] : true});
       axios.post('https://c915r94n6g.execute-api.us-west-1.amazonaws.com/ver1', postData, axiosConfig)
       .then((url) => {
-        return axios.get(url.data)
+        console.log(url.data.body);
+        let u = url.data.body.substring(9, url.data.body.length - 1);
+        return axios.post('https://'  + u)
       })
       .then((res) => {
+        console.log(res);
         const url = window.URL.createObjectURL(new Blob([res.data]));
         const link = document.createElement('a');
         link.href = url;
         link.setAttribute('download', 'hello.txt');
         document.body.appendChild(link);
         link.click();
-        setDownloading({...downloading, [row['document']] : false});
+        setDownloading({...downloading, [index] : false});
       })
       .catch((err) => {
         console.log(err);
-        setDownloading({...downloading, [row['document']] : false});
+        setDownloading({...downloading, [index] : false});
       })
     }
     
