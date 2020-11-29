@@ -22,7 +22,7 @@ import Button from '@material-ui/core/Button';
 import { Button as SemButton } from 'semantic-ui-react';
 import Grid from '@material-ui/core/Grid';
 import { FormHelperText } from '@material-ui/core';
-
+import { useMediaQuery } from 'react-responsive';
 
 const __useStyles = makeStyles((theme) => ({
   root: {
@@ -45,9 +45,19 @@ const columns = [
   { id: 'download', label: 'Download', minWidth: 10}
 ];
 
-const useStyles = makeStyles({
+const useStylesDesktop = makeStyles({
   root: {
     width: '50%',
+    margin: '0 auto',
+  },
+  container: {
+    maxHeight: 440,
+  },
+});
+
+const useStylesMobile = makeStyles({
+  root: {
+    width: '100%',
     margin: '0 auto',
   },
   container: {
@@ -66,7 +76,7 @@ const UserProfileInfo = ({form, buttonDisable, onChange, onSubmit}) => {
         <TextField 
           id="standard-error" 
           label="First Name" 
-          name="firstName" 
+          name="firstName"
           value={form.firstName || ''} 
           onChange={onChange}
           error = {form.firstName?.length == 0 ? true : false}
@@ -117,7 +127,13 @@ const UserProfileInfo = ({form, buttonDisable, onChange, onSubmit}) => {
 }
 
 const StickyHeadTable = ({rows, handleDocumentDownload, downloading}) => {
-  const classes = useStyles();
+
+  const isMobile = useMediaQuery({
+    query: '(max-width: 768px)'
+  })
+
+  const classesD = useStylesDesktop();
+  const classesM = useStylesMobile();
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
@@ -129,6 +145,14 @@ const StickyHeadTable = ({rows, handleDocumentDownload, downloading}) => {
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
+
+
+  let classes = null;
+  if(isMobile) {
+    classes = classesM;
+  } else {
+    classes = classesD;
+  }
 
   return (
     <div id="container">

@@ -11,7 +11,8 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import MatButton from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
-import ChipInput from 'material-ui-chip-input'
+import ChipInput from 'material-ui-chip-input';
+import { useMediaQuery } from 'react-responsive';
 
 const getOptions = (number, prefix = 'Length: ', suffix = '%') =>
   _.times(number, (index) => ({
@@ -39,6 +40,10 @@ const SummarizeUI = ({
       setOpen(false);
     };
 
+    const isMobile = useMediaQuery({
+        query: '(max-width: 768px)'
+    })
+
     return (
         <div>
             <Header />
@@ -46,11 +51,11 @@ const SummarizeUI = ({
                 <Grid.Column>
                     <Form style={{ resize : "none" }}>
                         <TextArea
+                        style={{ border : 'black solid' }} 
                         value = {inputText || ""}
                         onChange = {onInputChange}
                         name = "inputText"
                         label = "InputText"
-                        style={{ border : 'black solid' }} 
                         placeholder='Copy/Paste the text here' 
                         />
                     </Form>
@@ -78,6 +83,76 @@ const SummarizeUI = ({
                     placeholder="Enter/Delete tags"
                     allowDuplicates={false}
                 />
+                { isMobile === true ? <>
+                <Grid.Column textAlign="center">
+                <Dropdown style={{ textAlign:'center', width:150, backgroundColor:'#2185d0', color:'#f2fafe'}} 
+                className='button icon' 
+                primary 
+                placeholder='Length ' 
+                scrolling 
+                options={getOptions(7)} 
+                onChange={handleLength}
+                />
+                <Button style={{ width:150 }} onClick = {onSummarizeSubmit} primary loading={summarizeLoad} disabled={inputTextValid}>
+                    <Icon name="compress"></Icon>
+                    Summarize
+                    </Button>
+            </Grid.Column>
+            <Grid.Column textAlign="center">
+                <Button style={{ width:150 }} primary loading={saveLoad} onClick = {handleSaveClickOpen} disabled={ canSave }>
+                    <Icon name="save"></Icon>
+                    Save
+                </Button>
+                <Button style={{ width:150 }} primary loading={saveLoad} onClick= {handleClearOutputText} disabled={ canSave }>
+                    <Icon name="save"></Icon>
+                    Clear Output
+                </Button>
+                { localStorage.getItem('isAuth') == 'true' ? 
+                    <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
+                        <DialogTitle id="form-dialog-title">Save</DialogTitle>
+                        <DialogContent>
+                            <DialogContentText>
+                                Please Enter a document name to save the summary on the cloud.
+                            </DialogContentText>
+                            <TextField
+                            autoFocus
+                            margin="dense"
+                            id="document_name"
+                            label="Document Name"
+                            type="text"
+                            fullWidth  
+                            />
+                        </DialogContent>
+                        <DialogActions>
+                            <MatButton onClick={handleClose} color="primary">
+                                Cancel
+                            </MatButton>
+                            <MatButton onClick={handleClose} color="primary">
+                                Proceed
+                            </MatButton>
+                        </DialogActions>
+                        </Dialog>
+                :
+                <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
+                <DialogTitle id="form-dialog-title">Save</DialogTitle>
+                <DialogContent>
+                    <DialogContentText>
+                        Please login to save the summary on the cloud.
+                    </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                    <MatButton onClick={handleClose} color="primary">
+                        Cancel
+                    </MatButton>
+                    <MatButton component={Link} to={'/login'} color="primary">
+                        Login
+                    </MatButton>
+                </DialogActions>
+                </Dialog>
+            }
+            </Grid.Column>
+            </>
+                : <>
                 <Grid.Column textAlign="right">
                     <Dropdown style={{ textAlign:'center', width:150, backgroundColor:'#2185d0', color:'#f2fafe'}} 
                     className='button icon' 
@@ -101,7 +176,7 @@ const SummarizeUI = ({
                         <Icon name="save"></Icon>
                         Clear Output
                     </Button>
-                    {localStorage.getItem('isAuth') == 'true' ? 
+                    { localStorage.getItem('isAuth') == 'true' ? 
                         <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
                             <DialogTitle id="form-dialog-title">Save</DialogTitle>
                             <DialogContent>
@@ -145,6 +220,8 @@ const SummarizeUI = ({
                     </Dialog>
                 }
                 </Grid.Column>
+                </>
+            }
             </Grid>
         </div>
     );

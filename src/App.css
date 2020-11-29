@@ -42,9 +42,7 @@
   resize : none !important;
   width: 100% !important;
   height: 50vh !important;
-  border-color: "red" !important;
 }
-
 
 .submenu:hover {
   background-color: #2098D1 !important;
