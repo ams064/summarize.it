@@ -9,6 +9,7 @@ import {
 } from "semantic-ui-react";
 import Header from "../../components/Header";
 import { Link } from "react-router-dom";
+import Footer from '../../components/Footer';
 
 const SignupUI = ({
   form: { onChange, form, signupFormValid, onSubmit, loading, fieldErrors, message },

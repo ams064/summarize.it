@@ -8,6 +8,7 @@ import SignupComponent from './containers/Signup';
 import SummarizeComponent from './containers/Summarize';
 import DashboardComponent from './containers/Dashboard';
 import ForgotPasswordComponent from './containers/ForgotPassword';
+import {useEffect} from 'react';
 
 import Amplify from 'aws-amplify';
 import awsconfig from './aws-exports';
@@ -36,9 +37,9 @@ function DecisionRoute ({ component : Component, skipIfAuthorized : skip ,...res
   )
 }
 
-function App() {
+function App() {  
   return (
-    <AppProvider>
+  <AppProvider>
       <Router>
         <Switch>
           <Route path= '/' exact component = {SummarizeComponent} />
@@ -49,6 +50,7 @@ function App() {
         </Switch>
       </Router>
     </AppProvider>
+ 
   );
 }
 

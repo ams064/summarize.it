@@ -8,7 +8,7 @@ import {
   Message,
 } from "semantic-ui-react";
 import Header from "../../components/Header";
-
+import Footer from '../../components/Footer';
 
 
 const ForgotPasswordUI = ({
@@ -23,8 +23,8 @@ const ForgotPasswordUI = ({
           <SemanticHeader>Forgot Password</SemanticHeader>
           <Segment>
             <Form>
-              {err.length != 0 && err !== false ?
-                <Message content={err} negative /> : message.length != 0 && message !== null ?
+              {err.length !== 0 && err !== false ?
+                <Message content={err} negative /> : message.length !== 0 && message !== null ?
                 <Message content={message} positive /> : <></>
               }
               <Form.Field>
@@ -39,7 +39,7 @@ const ForgotPasswordUI = ({
               {codeSent === false ?  
                 <Button
                     onClick={onEmailSubmit}
-                    disabled={form.email?.length == 0 ? true : false}
+                    disabled={form.email?.length === 0 ? true : false}
                     fluid
                     loading={isSendingCode}
                     primary
@@ -51,7 +51,7 @@ const ForgotPasswordUI = ({
                 <div>
                 <Button
                     onClick={onEmailSubmit}
-                    disabled={form.email?.length == 0 ? true : false}
+                    disabled={form.email?.length === 0 ? true : false}
                     fluid
                     loading={isSendingCode}
                     primary
@@ -105,6 +105,7 @@ const ForgotPasswordUI = ({
           </Segment>
         </Grid.Column>
       </Grid>
+      <Footer/>
     </div>
   );
 };

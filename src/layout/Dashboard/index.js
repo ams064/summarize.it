@@ -23,6 +23,7 @@ import { Button as SemButton } from 'semantic-ui-react';
 import Grid from '@material-ui/core/Grid';
 import { FormHelperText } from '@material-ui/core';
 import { useMediaQuery } from 'react-responsive';
+import Footer from '../../components/Footer';
 
 const __useStyles = makeStyles((theme) => ({
   root: {
@@ -79,16 +80,16 @@ const UserProfileInfo = ({form, buttonDisable, onChange, onSubmit}) => {
           name="firstName"
           value={form.firstName || ''} 
           onChange={onChange}
-          error = {form.firstName?.length == 0 ? true : false}
-          helperText={form.firstName?.length == 0 ? "Field can not be blank" : "" }/>
+          error = {form.firstName?.length === 0 ? true : false}
+          helperText={form.firstName?.length === 0 ? "Field can not be blank" : "" }/>
         <TextField
-          error = {form.lastName?.length == 0 ? true : false}
+          error = {form.lastName?.length === 0 ? true : false}
           id="standard-error"
           label="Last Name"
           value={form.lastName || ''}
           onChange={onChange}
           name="lastName"
-          helperText={form.lastName?.length == 0 ? "Field can not be blank" : "" }
+          helperText={form.lastName?.length === 0 ? "Field can not be blank" : "" }
         />
       </div>
       <div>
@@ -98,20 +99,20 @@ const UserProfileInfo = ({form, buttonDisable, onChange, onSubmit}) => {
         label="Current Password" 
         type="password" 
         onChange={onChange}
-        error={(form.newPassword?.length && form.confirmPassword?.length) ? form.currentPassword?.length == 0 ? true : false : false} />
+        error={(form.newPassword?.length && form.confirmPassword?.length) ? form.currentPassword?.length === 0 ? true : false : false} />
       </div>
       <div>
         <TextField
-          error = {(form.currentPassword?.length) ? form.newPassword?.length == 0 ? true : false : false}
+          error = {(form.currentPassword?.length) ? form.newPassword?.length === 0 ? true : false : false}
           id="standard-error"
           label="New Password"
           type= "password"
           onChange={onChange}
           name="newPassword"
-          helperText={(form.currentPassword?.length) ? form.newPassword?.length == 0 ? "Field can not be blank" : "" : ""}
+          helperText={(form.currentPassword?.length) ? form.newPassword?.length === 0 ? "Field can not be blank" : "" : ""}
         />
         <TextField 
-        error = {(form.newPassword?.length) ? form.confirmPassword?.length == 0 ? true : false : false} 
+        error = {(form.newPassword?.length) ? form.confirmPassword?.length === 0 ? true : false : false} 
         id="standard-error" 
         label="Confirm Password" 
         name="confirmPassword" 
@@ -257,6 +258,7 @@ const DashboardUI = ({
   };
 
   return (
+    <div>
     <div className={classes.root}>
         <Header />
         <div></div>
@@ -278,6 +280,8 @@ const DashboardUI = ({
           <StickyHeadTable rows={rows} handleDocumentDownload={handleDocumentDownload} downloading={downloading} />
         </TabPanel>
     </div>
+    </div>
+
   );
 }
 

@@ -9,6 +9,7 @@ import {
 } from "semantic-ui-react";
 import Header from "../../components/Header";
 import { Link } from "react-router-dom";
+import Footer from '../../components/Footer';
 
 const LoginUI = ({
   form: { onChange, form, loginFormValid, err, onSubmit, loading, message },
@@ -22,8 +23,8 @@ const LoginUI = ({
           <SemanticHeader>Login to your account</SemanticHeader>
           <Segment>
             <Form>
-              {err.length != 0 && err !== false ?
-                <Message content={err} negative /> : message.length != 0 && message !== null ?
+              {err.length !== 0 && err !== false ?
+                <Message content={err} negative /> : message.length !== 0 && message !== null ?
                 <Message content={message} positive /> : <></>
               }
               <Form.Field>
