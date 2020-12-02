@@ -101,11 +101,11 @@ const SignupUI = ({
               >
                 Submit
               </Button>
-            </Form>
-
-            <Segment>
+              <Segment>
               Already have an account? <Link to="/login">Login</Link>.
             </Segment>
+            </Form>
+
         </Grid.Column>
       </Grid>
       <p>&nbsp;</p>

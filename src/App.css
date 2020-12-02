@@ -124,3 +124,10 @@ h1:first-child {
 .ui.button, .ui.buttons .button, .ui.buttons .or {
   background-color: #3f51b5 !important;
 }
+
+.ui.form {
+  position: relative;
+  max-width: 100%;
+  width: 90%;
+  margin: 0 auto;
+}
