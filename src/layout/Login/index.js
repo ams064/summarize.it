@@ -7,21 +7,26 @@ import {
   Segment,
   Message,
 } from "semantic-ui-react";
-import Header from "../../components/Header";
 import { Link } from "react-router-dom";
-import Footer from '../../components/Footer';
+import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import Avatar from '@material-ui/core/Avatar';
+import Typography from '@material-ui/core/Typography';
 
 const LoginUI = ({
   form: { onChange, form, loginFormValid, err, onSubmit, loading, message },
 }) => {
   return (
     <div>
-      <Header />
-
+      <p>&nbsp;</p>
+      <p>&nbsp;</p>
+      <p>&nbsp;</p>
       <Grid centered>
         <Grid.Column style={{ maxWidth: 550, marginTop: 20 }}>
-          <SemanticHeader>Login to your account</SemanticHeader>
-          <Segment>
+          <SemanticHeader>
+            <Avatar >
+              <LockOutlinedIcon />
+            </Avatar>
+          </SemanticHeader>
             <Form>
               {err.length !== 0 && err !== false ?
                 <Message content={err} negative /> : message.length !== 0 && message !== null ?
@@ -61,12 +66,20 @@ const LoginUI = ({
                 Need an account? <Link to="/signup">Sign up</Link>.
               </Segment>
               <Segment>
-              Trouble accessing your account? <Link to="/forgotpassword">Click here</Link>
+              Trouble accessing your account? <Link to="/forgotpassword">Click here.</Link>
               </Segment>
             </Form>
-          </Segment>
         </Grid.Column>
       </Grid>
+      <p>&nbsp;</p>
+      <Typography variant="body2" color="textSecondary" align="center">
+      {'Copyright © '}
+      <Link color="inherit" to="/">
+        Summarize.it
+      </Link>{' '}
+      {new Date().getFullYear()}
+      {'.'}
+    </Typography>
     </div>
   );
 };

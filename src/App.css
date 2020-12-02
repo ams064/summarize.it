@@ -56,7 +56,7 @@
 .how-it-works {
   background-color: #000000;
   margin-top: 5%;
-  margin-bottom: 10%;
+  margin-bottom: 5%;
   padding-bottom: 4em;
   padding-top: 4em;
   text-align: center;
@@ -66,7 +66,7 @@
 .who-is-it-for {
   background-color:white;
   margin-top: 5%;
-  margin-bottom: 10%;
+  margin-bottom: -10%;
   padding-bottom: 4em;
   padding-top: 4em;
   text-align: center;
@@ -102,4 +102,25 @@ h1:first-child {
 
 .fa-heart {
   color: red; 
+}
+
+.ui.header {
+  text-align: center;
+}
+
+.MuiAvatar-root {
+  margin: 0 auto;
+}
+
+.MuiAvatar-colorDefault {
+  color: #fafafa;
+  background-color: #f50057 !important;
+}
+
+.ui.primary.button, .ui.primary.buttons .button {
+  background-color: #3f51b5 !important;
+}
+
+.ui.button, .ui.buttons .button, .ui.buttons .or {
+  background-color: #3f51b5 !important;
 }

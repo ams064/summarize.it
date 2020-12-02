@@ -7,20 +7,26 @@ import {
   Segment,
   Message,
 } from "semantic-ui-react";
-import Header from "../../components/Header";
 import { Link } from "react-router-dom";
-import Footer from '../../components/Footer';
+import Avatar from '@material-ui/core/Avatar';
+import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import Typography from '@material-ui/core/Typography';
 
 const SignupUI = ({
   form: { onChange, form, signupFormValid, onSubmit, loading, fieldErrors, message },
 }) => {
   return (
     <div>
-      <Header />
+      <p>&nbsp;</p>
+      <p>&nbsp;</p>
+      <p>&nbsp;</p>
       <Grid centered>
-        <Grid.Column style={{ maxWidth: 550, marginTop: 20 }}>
-          <SemanticHeader>Signup Here</SemanticHeader>
-          <Segment>
+        <Grid.Column style={{ maxWidth: 500, marginTop: 20 }}>
+        <SemanticHeader>
+            <Avatar >
+              <LockOutlinedIcon />
+            </Avatar>
+          </SemanticHeader>
             <Form>
               <Form.Field>
                 <Form.Input
@@ -100,9 +106,17 @@ const SignupUI = ({
             <Segment>
               Already have an account? <Link to="/login">Login</Link>.
             </Segment>
-          </Segment>
         </Grid.Column>
       </Grid>
+      <p>&nbsp;</p>
+      <Typography variant="body2" color="textSecondary" align="center">
+      {'Copyright © '}
+      <Link color="inherit" to="/" >
+        Summarize.it
+      </Link>{' '}
+      {new Date().getFullYear()}
+      {'.'}
+    </Typography>
     </div>
   );
 };

@@ -147,9 +147,6 @@ const Header = () => {
         <MenuItem>
             <Button color="inherit" component={Link} to={'/'}>How it works?</Button>
         </MenuItem>
-        <MenuItem>
-            <Button color="inherit" component={Link} to={'/'}>Contact</Button>
-        </MenuItem>
         {localStorage.getItem('isAuth') === 'true' ?
             <div>
             <MenuItem>
@@ -180,7 +177,6 @@ const Header = () => {
               <div className={classes.grow} />
               <div className={classes.sectionDesktop}>
                 <Button color="inherit">How it works?</Button>
-                <Button color="inherit" component={Link} to={'/'}>Contact</Button>
                 {localStorage.getItem('isAuth') == 'true' ?
                     <IconButton
                         edge="end"

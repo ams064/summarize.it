@@ -7,9 +7,11 @@ import {
   Segment,
   Message,
 } from "semantic-ui-react";
+import { Link } from "react-router-dom";
 import Header from "../../components/Header";
-import Footer from '../../components/Footer';
-
+import MailOutlineOutlinedIcon from '@material-ui/icons/MailOutlineOutlined';
+import Avatar from '@material-ui/core/Avatar';
+import Typography from '@material-ui/core/Typography';
 
 const ForgotPasswordUI = ({
   form: { onChange, form, err, onEmailSubmit, message, isSendingCode, codeSent, formValid, onResetPassword},
@@ -18,10 +20,16 @@ const ForgotPasswordUI = ({
   return (
     <div>
       <Header />
+      <p>&nbsp;</p>
+      <p>&nbsp;</p>
+      <p>&nbsp;</p>
       <Grid centered>
         <Grid.Column style={{ maxWidth: 550, marginTop: 20 }}>
-          <SemanticHeader>Forgot Password</SemanticHeader>
-          <Segment>
+        <SemanticHeader>
+            <Avatar >
+              <MailOutlineOutlinedIcon />
+            </Avatar>
+          </SemanticHeader>
             <Form>
               {err.length !== 0 && err !== false ?
                 <Message content={err} negative /> : message.length !== 0 && message !== null ?
@@ -45,7 +53,7 @@ const ForgotPasswordUI = ({
                     primary
                     type="submit"
                 >
-                    Send Confirmation Code
+                    Send Confirmation code to change password
                 </Button>
                 :
                 <div>
@@ -102,10 +110,17 @@ const ForgotPasswordUI = ({
                 </div>
             }
             </Form>
-          </Segment>
         </Grid.Column>
       </Grid>
-      <Footer/>
+      <p>&nbsp;</p>
+      <Typography variant="body2" color="textSecondary" align="center">
+      {'Copyright © '}
+      <Link color="inherit" to="/">
+        Summarize.it
+      </Link>{' '}
+      {new Date().getFullYear()}
+      {'.'}
+    </Typography>
     </div>
   );
 };

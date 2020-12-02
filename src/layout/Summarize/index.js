@@ -35,7 +35,7 @@ const Cards = () => {
       <Image src={reader} wrapped ui={false} />
       <Card.Content>
         <Card.Description>
-          If you are casual reader, college student, or a professional who wants to same time and increase productivity by summarizing large text into smaller but meaningful text. Summarize.it is for you.  
+          If you are casual reader, college student, or a professional who wants to save time and increase productivity by summarizing large text into smaller but meaningful text. Summarize.it is for you.  
         </Card.Description>
       </Card.Content>
       <Card.Content extra>
@@ -188,6 +188,8 @@ const SummarizeUI = ({
                     }
                 </Grid.Column>
             </Grid>
+            <p>&nbsp;</p>
+            <p>&nbsp;</p>
             <div className="how-it-works">
                 <h1> How it works ?</h1>
                 <LinearScaleIcon/><LinearScaleIcon/><LinearScaleIcon/>
@@ -314,18 +316,12 @@ const SummarizeUI = ({
             </Grid>
             <p>&nbsp;</p>
             <p>&nbsp;</p>
-            <p>&nbsp;</p>
-            <p>&nbsp;</p>
             <div className="how-it-works">
                 <h1> How it works ?</h1>
                 <LinearScaleIcon/><LinearScaleIcon/><LinearScaleIcon/>
                 <p>&nbsp;</p>
-                <p className="text">To help you summarize and analyze your argumentative texts, your articles, your scientific texts, 
-                    your history texts as well as your well-structured analyses work of art, 
-                    Summarize.it provides you with a "Summary text tool" : an educational tool that 
-                    identifies and summarizes the important ideas and facts of your documents.
-                    Summarize in 1-Click, go to the main idea or skim through so that you can then 
-                    interpret your texts quickly and develop your syntheses.</p>
+                <p className="text">We use state-of-the-art natural langauage processing technique to evaluate the importance of each sentence. Summaries can be generated for your news article, scientific journal, and many more documents in just 1-click.
+                Context and size for the summaries can be provided to tune summaries as per the user's needs. Additionally, all the summaries can be stored on cloud, making them accessible to you anytime and anywhere. </p>
             </div>
             <div className="who-is-it-for">
                 <h1> Who should use Summarize.it ?</h1>
@@ -335,7 +331,7 @@ const SummarizeUI = ({
             </div>
             </>
             }
-            <Footer/>
+          <Footer/>
         </div>
     );
 }

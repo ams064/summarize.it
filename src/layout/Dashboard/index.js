@@ -23,7 +23,7 @@ import { Button as SemButton } from 'semantic-ui-react';
 import Grid from '@material-ui/core/Grid';
 import { FormHelperText } from '@material-ui/core';
 import { useMediaQuery } from 'react-responsive';
-import Footer from '../../components/Footer';
+import '../../App.css';
 
 const __useStyles = makeStyles((theme) => ({
   root: {
