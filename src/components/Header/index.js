@@ -177,7 +177,7 @@ const Header = () => {
               <div className={classes.grow} />
               <div className={classes.sectionDesktop}>
                 <Button color="inherit">How it works?</Button>
-                {localStorage.getItem('isAuth') == 'true' ?
+                {localStorage.getItem('isAuth') === 'true' ?
                     <IconButton
                         edge="end"
                         aria-label="account of current user"

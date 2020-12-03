@@ -13,9 +13,7 @@ export default () => {
       },
     } = useContext(AppContext);
 
-    const [newPage, setPage] = useState(0);
     const [form, setForm] = useState('');
-    const [infoUp, setInfoUp] = useState(false);
     const [err, setErr] = useState('');
     const [loading, setLoading] = useState(false);
     const [rows, setRows] = useState([]);
@@ -28,8 +26,13 @@ export default () => {
       setForm({...form, [name] : value});
     }
 
+    let axiosConfig = {
+      headers: {
+          'Authorization': data.signInUserSession.idToken.jwtToken,
+      }
+    };
+
     const onSubmit = () => {
-      setInfoUp(false);
       setLoading(true);
       if (form.newPassword?.length !== 0 && form.newPassword === form.confirmPassword) {
         updateUserInfo(form)(authDispatch)(setLoading);
@@ -46,24 +49,16 @@ export default () => {
 
       var postData = {
         document_name: row['document'],
-        timestamp : 'today',
-      };
-      
-      let axiosConfig = {
-        headers: {
-            'Authorization': data.signInUserSession.idToken.jwtToken,
-        }
+        timestamp : row['date'],
       };
 
       setDownloading({...downloading, [index] : true});
       axios.post('https://c915r94n6g.execute-api.us-west-1.amazonaws.com/ver1', postData, axiosConfig)
       .then((url) => {
-        console.log(url.data.body);
         let u = url.data.body.substring(9, url.data.body.length - 1);
-        return axios.post('https://'  + u)
+        return axios.get('https://'  + u)
       })
       .then((res) => {
-        console.log(res);
         const url = window.URL.createObjectURL(new Blob([res.data]));
         const link = document.createElement('a');
         link.href = url;
@@ -80,7 +75,7 @@ export default () => {
     
     useEffect(() => {
       if (isAuth && data) {
-        if (data && data.signInUserSession != null) {
+        if (data && data.signInUserSession !== null) {
           setForm({['firstName'] : data.attributes['custom:first_name'], ['lastName'] : data.attributes['custom:last_name'], ['email'] : data.attributes['email'], ['currentPassword'] : '', ['newPassword'] :'', ['confirmPassword'] : '' });
           history.push("/dashboard");
         }
@@ -90,27 +85,27 @@ export default () => {
     }, [data]);
 
     useEffect(() => {
-      axios.post('https://ptdnxz4a65.execute-api.us-west-2.amazonaws.com/test', {document_name : 'hello'})
+      let axiosConfig = {
+        headers: {
+            'Authorization': data.signInUserSession.idToken.jwtToken,
+        }
+      };
+
+      axios.post('https://z44imzml3m.execute-api.us-west-1.amazonaws.com/Ver1', {dummy_data : "test"}, axiosConfig)
       .then((res) => {
         let r = JSON.parse(res.data.body);
+        console.log(r);
         setRows(r);
         setRowsChanged(false);
-        console.log(r);  
       }).catch((err) => {
         console.log(err);
       })
     }, [rowsChanged]);
-
-    const handleChangePage = (event, newPage) => {
-        setPage(newPage);
-        // call api to get the rows and update it.
-        setRows({});
-    };
   
     const load = loading;
     const infoUpdated = ((form.firstName?.length && form.lastName?.length) && (
       (!form.newPassword?.length && !form.currentPassword?.length && !form.confirmPassword?.length) ||
-      (form.newPassword?.length && form.currentPassword?.length && form.confirmPassword?.length))) == 0 ? false : true;
+      (form.newPassword?.length && form.currentPassword?.length && form.confirmPassword?.length))) === 0 ? false : true;
 
     return { form, infoUpdated, onChange, onSubmit, load, rows, handleDocumentDownload, downloading};
 };

@@ -1,4 +1,4 @@
-import React, { createContext, useReducer, useEffect, useState } from 'react';
+import React, { createContext, useReducer, useState } from 'react';
 import authInitialStates from './init/authInitialStates';
 import auth from './reducers/auth';
 import { Auth } from 'aws-amplify';
@@ -9,7 +9,6 @@ export const AppProvider = ({ children }) => {
 
     const [s, setState] = useState({});
 
-    const authInit = authInitialStates;
     Auth.currentAuthenticatedUser({
         bypassCache: true
     })

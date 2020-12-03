@@ -12,7 +12,6 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import MatButton from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
 import ChipInput from 'material-ui-chip-input';
 import LinearScaleIcon from '@material-ui/icons/LinearScale';
 import { Card, Image } from 'semantic-ui-react'
@@ -59,22 +58,10 @@ const Cards = () => {
 
 const SummarizeUI = ({
     form : {onInputChange, inputText, outputText, inputTextValid, onOutputChange, err, 
-        onSummarizeSubmit, onSaveSubmit, summarizeLoad, saveLoad, canSave, handleLength, handleContextTags, handleClearOutputText, isMobile, outputRef }
+        onSummarizeSubmit, open, handleClose, handleSaveClickOpen, onSaveSubmit, 
+        summarizeLoad, saveLoad, canSave, handleLength, handleContextTags, 
+        handleClearOutputText, isMobile, outputRef, handleDocumentOnChange, documentName }
 }) => {
-
-    const [open, setOpen] = React.useState(false);
-
-    const handleSaveClickOpen = () => {
-      setOpen(true);
-    };
-  
-    const handleClearClickOpen = () => {
-        setOpen(true);
-      };
-    
-    const handleClose = () => {
-      setOpen(false);
-    };
 
     return (
         <div>
@@ -139,7 +126,7 @@ const SummarizeUI = ({
                         <Icon name="save"></Icon>
                         Save
                     </Button>
-                    <Button style={{ width:145 }} primary loading={saveLoad} onClick= {handleClearOutputText} disabled={ canSave }>
+                    <Button style={{ width:145 }} primary onClick= {handleClearOutputText} >
                         <Icon name="save"></Icon>
                         Clear Output
                     </Button>
@@ -150,20 +137,23 @@ const SummarizeUI = ({
                                 <DialogContentText>
                                     Please Enter a document name to save the summary on the cloud.
                                 </DialogContentText>
-                                <TextField
+                                <TextArea
+                                value={documentName || ""}
                                 autoFocus
                                 margin="dense"
                                 id="document_name"
+                                name="documentName"
                                 label="Document Name"
                                 type="text"
                                 fullWidth  
+                                onChange={handleDocumentOnChange}
                                 />
                             </DialogContent>
                             <DialogActions>
                                 <MatButton onClick={handleClose} color="primary">
                                     Cancel
                                 </MatButton>
-                                <MatButton onClick={handleClose} color="primary">
+                                <MatButton onClick={onSaveSubmit} color="primary">
                                     Proceed
                                 </MatButton>
                             </DialogActions>
@@ -276,20 +266,20 @@ const SummarizeUI = ({
                                 <DialogContentText>
                                     Please Enter a document name to save the summary on the cloud.
                                 </DialogContentText>
-                                <TextField
+                                <TextArea
                                 autoFocus
-                                margin="dense"
-                                id="document_name"
-                                label="Document Name"
-                                type="text"
-                                fullWidth  
+                                value = {documentName || ""}
+                                onChange = {handleDocumentOnChange}
+                                name = "documentName"
+                                label = "document name"
+                                fullWidth
                                 />
                             </DialogContent>
                             <DialogActions>
                                 <MatButton onClick={handleClose} color="primary">
                                     Cancel
                                 </MatButton>
-                                <MatButton onClick={handleClose} color="primary">
+                                <MatButton onClick={onSaveSubmit} color="primary">
                                     Proceed
                                 </MatButton>
                             </DialogActions>

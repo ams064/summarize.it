@@ -22,12 +22,12 @@ export const login = ({ password, email }) => (dispatch) => {
     })
     .catch((err) => {
       console.log(err);
-      if(err.code == 'UserNotFoundException' || err.code == 'NotAuthorizedException') {
+      if(err.code === 'UserNotFoundException' || err.code === 'NotAuthorizedException') {
         dispatch({
           type: LOGIN_ERR,
           payload: 'Incorrect email or password',
         });
-      } else if(err.code == 'UserNotConfirmedException') {
+      } else if(err.code === 'UserNotConfirmedException') {
         dispatch({
           type: LOGIN_ERR,
           payload: 'Email address is not verified, please check your email for the verification link.'

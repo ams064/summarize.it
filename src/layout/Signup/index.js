@@ -5,7 +5,6 @@ import {
   Grid,
   Header as SemanticHeader,
   Segment,
-  Message,
 } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 import Avatar from '@material-ui/core/Avatar';
