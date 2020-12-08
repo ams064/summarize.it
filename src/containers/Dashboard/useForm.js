@@ -62,7 +62,7 @@ export default () => {
         const url = window.URL.createObjectURL(new Blob([res.data]));
         const link = document.createElement('a');
         link.href = url;
-        link.setAttribute('download', 'hello.txt');
+        link.setAttribute('download', row['document'] +'.txt');
         document.body.appendChild(link);
         link.click();
         setDownloading({...downloading, [index] : false});
