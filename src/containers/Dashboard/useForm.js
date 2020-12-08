@@ -94,7 +94,6 @@ export default () => {
       axios.post('https://z44imzml3m.execute-api.us-west-1.amazonaws.com/Ver1', {dummy_data : "test"}, axiosConfig)
       .then((res) => {
         let r = JSON.parse(res.data.body);
-        console.log(r);
         setRows(r);
         setRowsChanged(false);
       }).catch((err) => {

@@ -10,7 +10,7 @@ export const AppProvider = ({ children }) => {
     const [s, setState] = useState({});
 
     Auth.currentAuthenticatedUser({
-        bypassCache: true
+        bypassCache: false
     })
     .then((user) => {
         localStorage.setItem('isAuth', true);
