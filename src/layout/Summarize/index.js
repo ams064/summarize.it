@@ -90,7 +90,7 @@ const SummarizeUI = ({
                     allowDuplicates={false}
                 />
                 <Grid.Column textAlign="center">
-                    <Dropdown style={{ textAlign:'center', width:180, backgroundColor:'#2185d0', color:'#f2fafe'}} 
+                    <Dropdown style={{ textAlign:'center', width:150, backgroundColor:'#2185d0', color:'#f2fafe'}} 
                     className='button icon' 
                     primary 
                     placeholder='Length' 
@@ -237,7 +237,7 @@ const SummarizeUI = ({
                     allowDuplicates={false}
                 />
                 <Grid.Column textAlign="center">
-                    <Dropdown style={{ textAlign:'center', width:180, backgroundColor:'#2185d0', color:'#f2fafe'}} 
+                    <Dropdown style={{ textAlign:'center', width:150, backgroundColor:'#2185d0', color:'#f2fafe'}} 
                     className='button icon' 
                     primary 
                     placeholder='Length' 
