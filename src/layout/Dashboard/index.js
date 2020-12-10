@@ -23,6 +23,7 @@ import { Button as SemButton } from 'semantic-ui-react';
 import Grid from '@material-ui/core/Grid';
 import { FormHelperText } from '@material-ui/core';
 import { useMediaQuery } from 'react-responsive';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import '../../App.css';
 
 const __useStyles = makeStyles((theme) => ({
@@ -127,7 +128,7 @@ const UserProfileInfo = ({form, buttonDisable, onChange, onSubmit}) => {
   );
 }
 
-const StickyHeadTable = ({rows, handleDocumentDownload, downloading}) => {
+const StickyHeadTable = ({rows, handleDocumentDownload, downloading, dataFetched}) => {
 
   const isMobile = useMediaQuery({
     query: '(max-width: 768px)'
@@ -159,6 +160,11 @@ const StickyHeadTable = ({rows, handleDocumentDownload, downloading}) => {
     <div id="container">
     <Paper className={classes.root}>
       <TableContainer className={classes.container}>
+      {!dataFetched ? 
+        <div style={{display: 'flex', justifyContent: 'center'}}><CircularProgress 
+        color="secondary"
+        right={40}
+        /> </div>:
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
             <TableRow>
@@ -190,9 +196,11 @@ const StickyHeadTable = ({rows, handleDocumentDownload, downloading}) => {
                   })}
                 </TableRow>
               );
-            })}
+            })
+            }
           </TableBody>
         </Table>
+      }
       </TableContainer>
       <TablePagination
         rowsPerPageOptions={[]}
@@ -248,7 +256,7 @@ const useStyles_ = makeStyles((theme) => ({
 }));
 
 const DashboardUI = ({ 
-  data : {form, infoUpdated, onChange, onSubmit, rows, handleDocumentDownload, downloading}
+  data : {form, infoUpdated, onChange, onSubmit, rows, handleDocumentDownload, downloading, dataFetched}
 }) => {
   const classes = useStyles_();
   const [value, setValue] = React.useState(0);
@@ -277,7 +285,7 @@ const DashboardUI = ({
           <UserProfileInfo form={form} buttonDisable = {infoUpdated} onChange={onChange} onSubmit={onSubmit} />
         </TabPanel>
         <TabPanel value={value} index={1}>
-          <StickyHeadTable rows={rows} handleDocumentDownload={handleDocumentDownload} downloading={downloading} />
+          <StickyHeadTable rows={rows} handleDocumentDownload={handleDocumentDownload} downloading={downloading} dataFetched={dataFetched} />
         </TabPanel>
     </div>
     </div>

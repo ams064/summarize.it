@@ -20,6 +20,7 @@ export default () => {
     const [rowsChanged, setRowsChanged] = useState(true);
     const history = useHistory();
     const [downloading, setDownloading] = useState({});
+    const [dataFetched, setDataFetched] = useState(false);
   
     const onChange = (event) => {
       const { target: { name, value } } = event;
@@ -45,6 +46,7 @@ export default () => {
       }
     };
 
+    // Gets the presigned url and downloads the document for the user from AWS S3.
     const handleDocumentDownload = (row, index) => {
 
       var postData = {
@@ -84,7 +86,9 @@ export default () => {
       }
     }, [data]);
 
+    // Update the table on row change, rows here means list of document for the users.
     useEffect(() => {
+      setDataFetched(false);
       let axiosConfig = {
         headers: {
             'Authorization': data.signInUserSession.idToken.jwtToken,
@@ -96,6 +100,7 @@ export default () => {
         let r = JSON.parse(res.data.body);
         setRows(r);
         setRowsChanged(false);
+        setDataFetched(true);
       }).catch((err) => {
         console.log(err);
       })
@@ -106,5 +111,5 @@ export default () => {
       (!form.newPassword?.length && !form.currentPassword?.length && !form.confirmPassword?.length) ||
       (form.newPassword?.length && form.currentPassword?.length && form.confirmPassword?.length))) === 0 ? false : true;
 
-    return { form, infoUpdated, onChange, onSubmit, load, rows, handleDocumentDownload, downloading};
+    return { form, infoUpdated, onChange, onSubmit, load, rows, handleDocumentDownload, downloading, dataFetched};
 };

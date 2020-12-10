@@ -17,6 +17,11 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
+
+/*
+ Design for the header of the summarize.it appliaction.
+*/
+
 const useStyles = makeStyles((theme) => ({
     grow: {
       flexGrow: 1,
