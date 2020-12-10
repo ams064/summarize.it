@@ -90,6 +90,9 @@ import {
             ...state.auth,
             currInput : payload.inputText,
             currOutput : payload.outputText,
+            currTags : payload.currTags,
+            currLength : payload.currLength,
+            currSave : payload.currSave,
           },
         };
 
@@ -100,6 +103,9 @@ import {
               ...state.auth,
               currInput : null,
               currOutput : null,
+              currTags : ["News"],
+              currLength : 30,
+              currSave : false,
           },
         };
 

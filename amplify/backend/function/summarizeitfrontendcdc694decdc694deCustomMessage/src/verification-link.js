@@ -5,7 +5,7 @@ exports.handler = (event, context, callback) => {
     const { codeParameter } = event.request;
     const { region, userName } = event;
     const { clientId } = event.callerContext;
-    const redirectUrl = 'http://localhost:3000/login';
+    const redirectUrl = 'https://master.d1vwpnxehcamdn.amplifyapp.com/login';
     const resourcePrefix = process.env.RESOURCENAME.split('CustomMessage')[0];
 
     const hyphenRegions = [

@@ -4,7 +4,7 @@ import {
 } from "../../utils/constants/actiontypes";
 
 
-export const save = (inputText, outputText, documentName, data) => (setSaveLoad) => (dispatch) => {
+export const save = (inputText, outputText, documentName, data) => (setSaveLoad) => (setCanSave) => (dispatch) => {
 
     let axiosConfig = {
     headers: {
@@ -15,6 +15,7 @@ export const save = (inputText, outputText, documentName, data) => (setSaveLoad)
     axios.post('https://pycn211n6k.execute-api.us-west-1.amazonaws.com/ver1', {input_data : inputText, output_data : outputText, file_name : documentName}, axiosConfig)
     .then((res) => {
         setSaveLoad(false);
+        setCanSave(false);
         dispatch({
           type: SUMMARY_SAVED,
           payload : true,

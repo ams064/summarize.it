@@ -28,7 +28,7 @@ const getOptions = (number, prefix = 'Length: ', suffix = '%') =>
 
 const Cards = () => {
     return (
-    <div style={{width:'50%', textAlign:'center', margin:'0 auto'}}>
+    <div style={{width:'70%', textAlign:'center', margin:'0 auto'}}>
     <Card.Group centered raised itemsPerRow={2} stackable>
     <Card>
       <Image src={reader} wrapped ui={false} />
@@ -60,7 +60,7 @@ const SummarizeUI = ({
     form : {onInputChange, inputText, outputText, inputTextValid, onOutputChange, err, 
         onSummarizeSubmit, open, handleClose, handleSaveClickOpen, onSaveSubmit, 
         summarizeLoad, saveLoad, canSave, handleLength, handleContextTags, 
-        handleClearOutputText, isMobile, outputRef, handleDocumentOnChange, documentName }
+        handleClearOutputText, isMobile, outputRef, handleDocumentOnChange, documentName, tags, deflength }
 }) => {
 
     return (
@@ -83,7 +83,7 @@ const SummarizeUI = ({
                 <Grid container columns={2} stackable centered >
                 <ChipInput
                     fullWidth
-                    defaultValue={['News']}
+                    defaultValue={tags}
                     onChange={(chips) => handleContextTags(chips)}
                     variant='outlined'
                     placeholder="Enter/Delete tags"
@@ -92,7 +92,8 @@ const SummarizeUI = ({
                 <Grid.Column textAlign="center">
                     <Dropdown style={{ textAlign:'center', width:150, backgroundColor:'#2185d0', color:'#f2fafe'}} 
                     className='button icon' 
-                    primary 
+                    primary
+                    defaultValue={deflength}
                     placeholder='Length' 
                     scrolling 
                     options={getOptions(7)} 
@@ -122,7 +123,7 @@ const SummarizeUI = ({
             </Grid>
             <Grid>
                 <Grid.Column textAlign="center">
-                    <Button style={{ width:145 }} primary loading={saveLoad} onClick= {handleSaveClickOpen} disabled={ canSave }>
+                    <Button style={{ width:145 }} primary loading={saveLoad} onClick= {handleSaveClickOpen} disabled={ !canSave }>
                         <Icon name="save"></Icon>
                         Save
                     </Button>
@@ -230,7 +231,7 @@ const SummarizeUI = ({
             <Grid container columns={2} stackable centered >
                 <ChipInput
                     fullWidth
-                    defaultValue={['News']}
+                    defaultValue={tags}
                     onChange={(chips) => handleContextTags(chips)}
                     variant='outlined'
                     placeholder="Enter/Delete tags"
@@ -239,6 +240,7 @@ const SummarizeUI = ({
                 <Grid.Column textAlign="center">
                     <Dropdown style={{ textAlign:'center', width:150, backgroundColor:'#2185d0', color:'#f2fafe'}} 
                     className='button icon' 
+                    defaultValue={deflength}
                     primary 
                     placeholder='Length' 
                     scrolling 
@@ -251,11 +253,11 @@ const SummarizeUI = ({
                         </Button>
                 </Grid.Column>
                 <Grid.Column textAlign="center">
-                    <Button style={{ width:150 }} primary loading={saveLoad} onClick= {handleSaveClickOpen} disabled={ canSave }>
+                    <Button style={{ width:150 }} primary loading={saveLoad} onClick= {handleSaveClickOpen} disabled={ !canSave }>
                         <Icon name="save"></Icon>
                         Save
                     </Button>
-                    <Button style={{ width:150 }} primary loading={saveLoad} onClick= {handleClearOutputText} disabled={ canSave }>
+                    <Button style={{ width:150 }} primary loading={saveLoad} onClick= {handleClearOutputText} disabled={ !canSave }>
                         <Icon name="save"></Icon>
                         Clear Output
                     </Button>

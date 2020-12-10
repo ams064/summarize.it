@@ -10,7 +10,7 @@ export default () => {
   const {
     authDispatch,
     authState: {
-      auth: { error, currInput, currOutput, data},
+      auth: { error, currInput, currOutput, data, currSave, currLength, currTags},
     },
   } = useContext(AppContext);
 
@@ -21,8 +21,10 @@ export default () => {
   const [summarizeLoad, setSummarizeLoad] = useState(false);
   const [saveLoad, setSaveLoad] = useState(false);
   const [summarized, setSummarized] = useState(true);
-  const [length, setOutputLength] = useState(50);
-  const [tags, setContextTags] = useState(['News']);
+  const [deflength, setDefOutputLength] = useState((currLength/10) -1);
+  const [length, setOutputLength] = useState(currLength);
+  const [tags, setContextTags] = useState(currTags);
+  const [canSave, setCanSave] = useState(currSave);
   const outputRef = useRef(null);
   const [open, setOpen] = useState(false);
 
@@ -34,6 +36,7 @@ export default () => {
     setErrors('');
     setInputText(value);
     setSummarized(true);
+    setCanSave(false);
     authDispatch({
       type: INPUT_CHANGE,
       payload : {
@@ -71,7 +74,7 @@ export default () => {
   const onSummarizeSubmit = () => {
     setErrors('');
     setSummarizeLoad(true);
-    summarize(inputText, length, tags)(setOutputText)(setSummarizeLoad)(setSummarized)(authDispatch);
+    summarize(inputText, length, tags)(setOutputText)(setSummarizeLoad)(setSummarized)(setCanSave)(authDispatch);
     if(isMobile === true && outputRef.current !== null) {
       outputRef.current.scrollIntoView({ behavior: "smooth" });
     }
@@ -80,7 +83,7 @@ export default () => {
   const onSaveSubmit = () => {
     setOpen(false);
     setSaveLoad(true);
-    save(inputText, outputText, documentName, data)(setSaveLoad)(authDispatch);
+    save(inputText, outputText, documentName, data)(setSaveLoad)(setCanSave)(authDispatch);
   }
 
   const handleSaveClickOpen = () => {
@@ -90,11 +93,9 @@ export default () => {
   const handleClose = () => {
     setOpen(false);
   }
-
-  const canSave = summarized;
   
   return { inputText, onInputChange, outputText, summarizeLoad, err, 
     inputTextValid, handleSaveClickOpen, onSummarizeSubmit, onSaveSubmit, 
     saveLoad, canSave, handleLength, handleContextTags, handleClearOutputText, 
-    isMobile, outputRef, open, handleDocumentOnChange, documentName, handleClose};
+    isMobile, outputRef, open, handleDocumentOnChange, documentName, handleClose, tags, deflength};
 };

@@ -9,5 +9,8 @@ export default {
       currInput : null,
       currOutput : null,
       rowsChange : false,
+      currSave : false,
+      currLength : 30,
+      currTags : ["News"],
     },
 };
