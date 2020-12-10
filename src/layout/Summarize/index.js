@@ -83,14 +83,14 @@ const SummarizeUI = ({
                 <Grid container columns={2} stackable centered >
                 <ChipInput
                     fullWidth
-                    defaultValue={['News','Technology','Facts','Internet','United States']}
+                    defaultValue={['News']}
                     onChange={(chips) => handleContextTags(chips)}
                     variant='outlined'
                     placeholder="Enter/Delete tags"
                     allowDuplicates={false}
                 />
                 <Grid.Column textAlign="center">
-                    <Dropdown style={{ textAlign:'center', width:140, backgroundColor:'#2185d0', color:'#f2fafe'}} 
+                    <Dropdown style={{ textAlign:'center', width:180, backgroundColor:'#2185d0', color:'#f2fafe'}} 
                     className='button icon' 
                     primary 
                     placeholder='Length' 
@@ -230,17 +230,17 @@ const SummarizeUI = ({
             <Grid container columns={2} stackable centered >
                 <ChipInput
                     fullWidth
-                    defaultValue={['News','Technology','Facts','Internet','United States']}
+                    defaultValue={['News']}
                     onChange={(chips) => handleContextTags(chips)}
                     variant='outlined'
                     placeholder="Enter/Delete tags"
                     allowDuplicates={false}
                 />
                 <Grid.Column textAlign="center">
-                    <Dropdown style={{ textAlign:'center', width:150, backgroundColor:'#2185d0', color:'#f2fafe'}} 
+                    <Dropdown style={{ textAlign:'center', width:180, backgroundColor:'#2185d0', color:'#f2fafe'}} 
                     className='button icon' 
                     primary 
-                    placeholder='Length ' 
+                    placeholder='Length' 
                     scrolling 
                     options={getOptions(7)} 
                     onChange={handleLength}

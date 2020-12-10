@@ -12,7 +12,7 @@ export const save = (inputText, outputText, documentName, data) => (setSaveLoad)
     }
     };
 
-    axios.post('https://pycn211n6k.execute-api.us-west-1.amazonaws.com/ver1', {input_data : inputText, output_text : outputText, file_name : documentName}, axiosConfig)
+    axios.post('https://pycn211n6k.execute-api.us-west-1.amazonaws.com/ver1', {input_data : inputText, output_data : outputText, file_name : documentName}, axiosConfig)
     .then((res) => {
         setSaveLoad(false);
         dispatch({

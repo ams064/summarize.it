@@ -22,7 +22,7 @@ export default () => {
   const [saveLoad, setSaveLoad] = useState(false);
   const [summarized, setSummarized] = useState(true);
   const [length, setOutputLength] = useState(50);
-  const [tags, setContextTags] = useState([]);
+  const [tags, setContextTags] = useState(['News']);
   const outputRef = useRef(null);
   const [open, setOpen] = useState(false);
 
@@ -75,7 +75,6 @@ export default () => {
     if(isMobile === true && outputRef.current !== null) {
       outputRef.current.scrollIntoView({ behavior: "smooth" });
     }
-    setSummarizeLoad(false);
   };
 
   const onSaveSubmit = () => {
