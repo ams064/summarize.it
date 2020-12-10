@@ -144,9 +144,6 @@ const Header = () => {
         open={isMobileMenuOpen}
         onClose={handleMobileMenuClose}
       >
-        <MenuItem>
-            <Button color="inherit" component={Link} to={'/'}>How it works?</Button>
-        </MenuItem>
         {localStorage.getItem('isAuth') === 'true' ?
             <div>
             <MenuItem>
@@ -176,7 +173,6 @@ const Header = () => {
               </Typography>
               <div className={classes.grow} />
               <div className={classes.sectionDesktop}>
-                <Button color="inherit">How it works?</Button>
                 {localStorage.getItem('isAuth') === 'true' ?
                     <IconButton
                         edge="end"

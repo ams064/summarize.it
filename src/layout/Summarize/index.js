@@ -33,6 +33,7 @@ const Cards = () => {
     <Card>
       <Image src={reader} wrapped ui={false} />
       <Card.Content>
+      <Card.Header>Readers</Card.Header>
         <Card.Description>
           If you are casual reader, college student, or a professional who wants to save time and increase productivity by summarizing large text into smaller but meaningful text. Summarize.it is for you.  
         </Card.Description>
@@ -44,6 +45,7 @@ const Cards = () => {
     <Card>
       <Image src={writer} wrapped ui={false} />
       <Card.Content>
+      <Card.Header>Writers</Card.Header>
         <Card.Description>
             If you are novelist, journalist or a editor who wants to summarize thier creations for presentation or lessons, summarize.it has got you covered.
         </Card.Description>
@@ -56,6 +58,9 @@ const Cards = () => {
   )
 }
 
+
+/* Home page for the website, hase separate view for mobile and desktops 
+*/
 const SummarizeUI = ({
     form : {onInputChange, inputText, outputText, inputTextValid, onOutputChange, err, 
         onSummarizeSubmit, open, handleClose, handleSaveClickOpen, onSaveSubmit, 

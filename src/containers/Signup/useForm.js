@@ -26,7 +26,7 @@ export default () => {
     }
   }, [error]);
 
-  
+  /* Redirect to login after succesfull signup */
   useEffect(() => {
     if (data && data.user.signInUserSession == null && !allow_signup) {
       authDispatch({

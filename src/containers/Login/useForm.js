@@ -18,7 +18,6 @@ export default () => {
 
   const onChange = (e, { name, value }) => {
     setErrors('');
-    setMessage('');
     setForm({ ...form, [name]: value });
   };
 
@@ -42,6 +41,7 @@ export default () => {
     login(form)(authDispatch);
   };
 
+  /* if the user is already logged in, redirect to home page */
   useEffect(() => {
     if (isAuth && data) {
       if (data && data.signInUserSession != null) {

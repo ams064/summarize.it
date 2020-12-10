@@ -28,6 +28,7 @@ export default () => {
   const outputRef = useRef(null);
   const [open, setOpen] = useState(false);
 
+  // Check wether the current viewing screen is a mobile or desktop
   const isMobile = useMediaQuery({
     query: '(max-width: 770px)'
   })
@@ -69,12 +70,15 @@ export default () => {
       }
   }, [error]);
 
+  // Empty text is invalid, if ther is text enabled the summariz button
   const inputTextValid = !inputText?.length
 
+  // Call summarize API
   const onSummarizeSubmit = () => {
     setErrors('');
     setSummarizeLoad(true);
     summarize(inputText, length, tags)(setOutputText)(setSummarizeLoad)(setSummarized)(setCanSave)(authDispatch);
+    // FOr mobile scorll down to output text window
     if(isMobile === true && outputRef.current !== null) {
       outputRef.current.scrollIntoView({ behavior: "smooth" });
     }
@@ -86,6 +90,7 @@ export default () => {
     save(inputText, outputText, documentName, data)(setSaveLoad)(setCanSave)(authDispatch);
   }
 
+  // Handels save dialog open/close
   const handleSaveClickOpen = () => {
     setOpen(true);
   };

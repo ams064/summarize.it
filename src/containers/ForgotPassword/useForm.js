@@ -52,11 +52,5 @@ export default () => {
       }
   }
 
-  useEffect(() => {
-    if (opt_message != null && (err === null || err === '')) {
-        history.push('/login');
-      }
-  }, [opt_message]);
-
   return { form, onChange, err, onEmailSubmit, message, isSendingCode, isResetPasswordLoading, codeSent, formValid, onResetPassword };
 };
