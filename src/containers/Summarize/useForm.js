@@ -62,6 +62,7 @@ export default () => {
   const handleClearOutputText = () => {
     setOutputText('');
     setSummarized(true);
+    setCanSave(false);
   }
 
   useEffect(() => {

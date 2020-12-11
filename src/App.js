@@ -38,6 +38,10 @@ function DecisionRoute ({ component : Component, skipIfAuthorized : skip ,...res
 }
 
 function App() {  
+
+  useEffect(() => {
+    document.title = 'Summarize.it';
+  }, []);
   return (
   <AppProvider>
       <Router>
